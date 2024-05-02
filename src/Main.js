@@ -34,6 +34,11 @@ function Main() {
             element={<KakaoRedirectPage />}
           ></Route>
           <Route path="/RegisterPage" element={<RegisterPage />} />
+          <Route path="/FreeBoard" element={<FreeBoard/>} />
+          <Route
+            path="/BoardInformation/:boardslug"
+            element={<BoardInformation />}
+          />
         </Routes>
       </BrowserRouter>
     </>

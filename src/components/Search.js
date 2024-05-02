@@ -20,14 +20,15 @@ import { useNavigate } from "react-router-dom";
 
 /**검색 부분*/
 function Search() {
-  const data = jsondata;
-  const s = data.projects;
+  const s = jsondata.projects;
 
   let [region, setRegion] = useState("");
   let [job, setJob] = useState("");
   let [detail, setDetail] = useState("");
   let [views, setViews] = useState(0);
   let [search, setSearch] = useState("");
+
+  let copydata = s.sort();
 
   function onSearchHandler(event) {
     setSearch(event.target.value);
@@ -43,7 +44,13 @@ function Search() {
     setDetail(event.target.value);
   }
   function handleChange4(event) {
-    setViews(event.target.value);
+    if (event.target.value === "조회수") {
+      setView("조회수");
+      copydata = s.sort((a, b) => a.views - b.views);
+    } else if (event.target.value === "높은순") {
+      setView("높은순");
+      copydata = s.sort((a, b) => b.views - a.views);
+    }
   }
 
   const navigate = useNavigate();
@@ -60,6 +67,15 @@ function Search() {
       } else if (
         project.publisher.toLowerCase().includes(search.toLowerCase())
       ) {
+        return project;
+      } else return 0;
+    })
+    .filter((project) => {
+      if (view === "") {
+        return project;
+      } else if (view === "조회수") {
+        return project;
+      } else if (view === "높은순") {
         return project;
       } else return 0;
     })
@@ -314,12 +330,12 @@ function Search() {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={views}
-            label="조회 수"
+            label="조회수"
             onChange={handleChange4}
           >
             <MenuItem value={"조회수"}>조회수</MenuItem>
-            <MenuItem value={`높은 순`}>높은 순</MenuItem>
-            <MenuItem value={`낮은 순`}>낮은 순</MenuItem>
+            <MenuItem value={`높은순`}>높은순</MenuItem>
+            <MenuItem value={`낮은순`}>낮은순</MenuItem>
           </Select>
         </FormControl>
       </div>
