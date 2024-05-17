@@ -53,6 +53,7 @@ function Search() {
     }
   }
 
+  //등록하기 버튼 함수
   const navigate = useNavigate();
   function moveToResisterProject() {
     navigate("/RegisterProject");

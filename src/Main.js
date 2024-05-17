@@ -6,6 +6,8 @@ import RegisterProject from "./components/RegisterProject";
 import ProjectInformationPage from "./pages/ProjectInformationPage";
 import ProjectDetail from "./components/ProjectDetail";
 import UpdateProject from "./pages/UpdateProject";
+import StudyListPage from "./pages/study/StudyListPage";
+import RegisterStudy from "./components/study/RegisterStudy";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -15,6 +17,7 @@ import QuestionRead from "./pages/question/ReadPage";
 import FreeBoard from "./pages/FreeBoard";
 import BoardInformation from "./pages/BoardInformation";
 import Applycation from "./pages/Applycation";
+import StudyDetail from "./components/study/StudyDetail";
 
 function Main() {
   return (
@@ -31,6 +34,9 @@ function Main() {
           <Route path="/UpdateProject/:idx" element={<UpdateProject />} />
           <Route path="/ProjectInformation/:idx" element={<ProjectDetail />} />
           <Route path="/Applycation/:idx" element={<Applycation />} />
+          <Route path="/StudyList" element={<StudyListPage />} />
+          <Route path="/RegisterStudy" element={<RegisterStudy />} />
+          <Route path="/StudyInformation/:idx" element={<StudyDetail />} />
           <Route path="/MyPage" element={<MyPage />} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route

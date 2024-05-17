@@ -1,31 +1,45 @@
 //eslint-disable-next-line
 import { Link, NavLink } from "react-router-dom";
 import styles from "./ProjectSummary.module.css";
-import jsondata from "../api/mock.json";
+import { useState, useEffect } from "react";
+import axios from "../lib/axios";
 
 function ProjectSummary() {
-  const data = jsondata;
-  const p = data.projects;
+  const [projectList, setProjectList] = useState([]);
 
-  return p
-    .filter((project) => {
-      if (project.projectId <= 4) {
-        return project;
-      } else return 0;
-    })
-    .map((project) => (
-      <Link to={`/ProjectInformation/${project.slug}`} key={project.projectId}>
-        <div className={styles.projectSummary}>
-          <img
-            className={styles.photo}
-            alt="img"
-            src={require(`../assets/${project.image}`)}
-          />
-          <h1 className={styles.mainletter}>{project.title}</h1>
-          <h1 className={styles.subletter}>{project.introduction}</h1>
-        </div>
-      </Link>
-    ));
+  const getProjectList = async () => {
+    const response = await axios.get("/api/posts", {
+      params: {
+        category: "PROJECT",
+      },
+    });
+    setProjectList(response.data.content);
+  };
+  useEffect(() => {
+    getProjectList();
+  }, []);
+
+  return (
+    <>
+      <div className={styles.inner}>
+        {projectList.map((project) => (
+          <div className={styles.projectSummary}>
+            <Link
+              to={`/ProjectInformation/${project.id}`}
+              key={project.projectId}
+            >
+              <img
+                className={styles.photo}
+                alt="img"
+                src={require(`../assets/DefaultProjectImg.jpg`)}
+              />
+              <p className={styles.mainletter}>{project.title}</p>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }
 
 export default ProjectSummary;

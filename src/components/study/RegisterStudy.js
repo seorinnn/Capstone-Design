@@ -1,10 +1,10 @@
 import { useState } from "react";
-import styles from "./RegisterProject.module.css";
-import defaultProjectImg from "../assets/DefaultProjectImg.jpg";
-import axios from "../lib/axios";
+import styles from "./RegisterStudy.module.css";
+import defaultProjectImg from "../../assets/DefaultProjectImg.jpg";
+import axios from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 
-function RegisterProject() {
+function RegisterStudy() {
   const navigate = useNavigate();
   //프로젝트 배경이미지
   const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
@@ -12,9 +12,9 @@ function RegisterProject() {
 
   const [projectInfo, setProjectInfo] = useState({
     title: "",
-    category: "PROJECT",
+    category: "STUDY",
     content: "",
-    fieldList: [],
+    fieldList: [{ fieldCategory: "GENERAL", totalRecruitment: 0 }],
   });
 
   //비구조화 할당으로 projectInfo가 바로 값을 분해해 변수에 할당함
@@ -28,29 +28,20 @@ function RegisterProject() {
     });
   };
 
-  const handleFieldListChange = (index, event) => {
-    const { name, value } = event.target;
-    const newFieldList = [...fieldList];
-    // 숫자로 변환해야 하는 필드인 경우 parseInt를 사용하여 숫자로 변환
-    newFieldList[index][name] =
-      name === "totalRecruitment" ? parseInt(value, 10) : value;
+  const handleFieldChange = (event) => {
+    const { value } = event.target;
     setProjectInfo({
       ...projectInfo,
-      fieldList: newFieldList,
-    });
-  };
-
-  const addField = () => {
-    setProjectInfo({
-      ...projectInfo,
-      fieldList: [...fieldList, { fieldCategory: "", totalRecruitment: 0 }],
+      fieldList: [
+        { fieldCategory: "GENERAL", totalRecruitment: parseInt(value, 10) },
+      ],
     });
   };
 
   const postProject = async () => {
     await axios.post(`/api/posts`, projectInfo).then((res) => {
       alert("등록되었습니다.");
-      navigate("/ProjectList");
+      navigate("/StudyList");
     });
   };
 
@@ -58,21 +49,21 @@ function RegisterProject() {
     <>
       <div className={styles.RegisterProjectHeader}>
         <header>
-          <h1>프로젝트 등록하기</h1>
+          <h1>스터디 등록하기</h1>
         </header>
       </div>
       <main className={styles.RegisterProjectMain}>
         <div className={styles.projectImg}>
-          <h3>대표 이미지 선택</h3>
+          <h3>배경사진 선택</h3>
           <img alt="profileImg" src={defaultProjectImgSrc} />
           <input type="file"></input>
         </div>
         <div className={styles.projectName}>
-          <h3>프로젝트명</h3>
+          <h3>스터디명</h3>
           <input type="text" name="title" value={title} onChange={onChange} />
         </div>
         <div className={styles.projectInfo}>
-          <h3>프로젝트 소개 및 기간</h3>
+          <h3>스터디 소개 및 기간</h3>
           <textarea
             name="content"
             cols="30"
@@ -82,27 +73,17 @@ function RegisterProject() {
           />
         </div>
         <div className={styles.recruitmentDiv}>
-          <h3>모집 직무</h3>
-          <button onClick={addField}>직무 추가</button>
+          <h3>모집 인원</h3>
           {fieldList.map((field, index) => (
             <div key={index}>
-              <input
-                type="text"
-                name="fieldCategory"
-                value={field.fieldCategory}
-                onChange={(event) => handleFieldListChange(index, event)}
-              />
               <input
                 type="number"
                 name="totalRecruitment"
                 value={field.totalRecruitment}
-                onChange={(event) => handleFieldListChange(index, event)}
+                onChange={handleFieldChange}
               />
             </div>
           ))}
-        </div>
-        <div className={styles.language}>
-          <h3>사용 기술 및 언어</h3>
         </div>
         <div className={styles.etc}>
           <h3>기타 참고사항</h3>
@@ -115,4 +96,4 @@ function RegisterProject() {
   );
 }
 
-export default RegisterProject;
+export default RegisterStudy;

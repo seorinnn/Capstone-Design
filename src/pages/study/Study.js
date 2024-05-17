@@ -1,24 +1,17 @@
 import React from "react";
-import styles from "./Project.module.css";
-import axios from "../lib/axios";
+import styles from "./Study.module.css";
+import axios from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const Project = ({ title, content, fieldList = [] }) => {
+const Study = ({ title, content }) => {
   const navigate = useNavigate();
   const { idx } = useParams();
-
-  console.log(title);
-  console.log(fieldList);
 
   //수정 화면으로 이동
   const moveToUpdate = () => {
     navigate(`/UpdateProject/${idx}`);
   };
-  const moveToApply = () => {
-    navigate(`/Applycation/${idx}`);
-  };
-
 
   //게시글 삭제하기
   const deleteProject = async () => {
@@ -37,7 +30,7 @@ const Project = ({ title, content, fieldList = [] }) => {
           <p>채용 상태</p>
         </div>
         <header className={styles.projectInfoHeader}>
-          <img alt="projectImg" src={require(`../assets/paletteLogo.png`)} />
+          <img alt="projectImg" src={require(`../../assets/paletteLogo.png`)} />
           <div className={styles.headerInfo}>
             <div className={styles.headerInfoTitle}>
               <h1>{title}</h1>
@@ -47,9 +40,10 @@ const Project = ({ title, content, fieldList = [] }) => {
         </header>
         <main className={styles.projectInfoMain}>
           <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>프로젝트 소개 및 기간</h3>
+            <h3 className={styles.sectionTitle}>스터디 소개 및 기간</h3>
             <hr />
             <div className={styles.contents}>
+              <p className={styles.period}>기간 :</p>
               <p>{content}</p>
             </div>
           </div>
@@ -57,22 +51,10 @@ const Project = ({ title, content, fieldList = [] }) => {
             <h3 className={styles.sectionTitle}>현재 모집 현황</h3>
             <hr />
             <div className={styles.contents}>
-              {fieldList.map((field, index) => (
-                <div key={index} className={styles.recruitmentDiv}>
-                  <p>{field.fieldCategory}</p>
-                  <p>
-                    {field.currentRecruitment} / {field.totalRecruitment}
-                  </p>
-                  <button>지원</button>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>기술</h3>
-            <hr />
-            <div className={styles.contents}>
-              <p>기술 이미지</p>
+              <div className={styles.recruitmentDiv}>
+                <p>지원</p>
+                <button>지원</button>
+              </div>
             </div>
           </div>
           <div className={styles.section}>
@@ -103,4 +85,4 @@ const Project = ({ title, content, fieldList = [] }) => {
   );
 };
 
-export default Project;
+export default Study;

@@ -7,12 +7,11 @@ import styles from "./UpdateProject.module.css";
 const UpdateProject = () => {
   const navigate = useNavigate();
   const { idx } = useParams();
-  const [project, setProject] = useState({});
 
   //게시글 데이터 가져오기
   const getProject = async () => {
     const response = await axios.get(`/api/posts/${idx}`);
-    setProject(response.data);
+    setProjectInfo(response.data);
   };
 
   useEffect(() => {
@@ -56,7 +55,12 @@ const UpdateProject = () => {
     });
   };
 
-  const updateProject = async () => {};
+  const updateProject = async () => {
+    await axios.patch(`/api/posts/${idx}`, projectInfo).then((res) => {
+      alert("수정되었습니다.");
+      navigate(`/ProjectInformation/${idx}`);
+    });
+  };
 
   const cancel = async () => {
     navigate("/ProjectList");
