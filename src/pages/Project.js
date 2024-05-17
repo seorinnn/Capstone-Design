@@ -4,9 +4,12 @@ import axios from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const Project = ({ title, content }) => {
+const Project = ({ title, content, fieldList = [] }) => {
   const navigate = useNavigate();
   const { idx } = useParams();
+
+  console.log(title);
+  console.log(fieldList);
 
   //수정 화면으로 이동
   const moveToUpdate = () => {
@@ -43,7 +46,6 @@ const Project = ({ title, content }) => {
             <h3 className={styles.sectionTitle}>프로젝트 소개 및 기간</h3>
             <hr />
             <div className={styles.contents}>
-              <p className={styles.period}>기간 :</p>
               <p>{content}</p>
             </div>
           </div>
@@ -51,10 +53,15 @@ const Project = ({ title, content }) => {
             <h3 className={styles.sectionTitle}>현재 모집 현황</h3>
             <hr />
             <div className={styles.contents}>
-              <div className={styles.recruitmentDiv}>
-                <p>지원</p>
-                <button>지원</button>
-              </div>
+              {fieldList.map((field, index) => (
+                <div key={index} className={styles.recruitmentDiv}>
+                  <p>{field.fieldCategory}</p>
+                  <p>
+                    {field.currentRecruitment} / {field.totalRecruitment}
+                  </p>
+                  <button>지원</button>
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.section}>

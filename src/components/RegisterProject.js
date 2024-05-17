@@ -63,7 +63,7 @@ function RegisterProject() {
       </div>
       <main className={styles.RegisterProjectMain}>
         <div className={styles.projectImg}>
-          <h3>배경사진 선택</h3>
+          <h3>대표 이미지 선택</h3>
           <img alt="profileImg" src={defaultProjectImgSrc} />
           <input type="file"></input>
         </div>
@@ -83,6 +83,7 @@ function RegisterProject() {
         </div>
         <div className={styles.recruitmentDiv}>
           <h3>모집 직무</h3>
+          <button onClick={addField}>직무 추가</button>
           {fieldList.map((field, index) => (
             <div key={index}>
               <input
@@ -99,7 +100,6 @@ function RegisterProject() {
               />
             </div>
           ))}
-          <button onClick={addField}>직무 추가</button>
         </div>
         <div className={styles.language}>
           <h3>사용 기술 및 언어</h3>
@@ -107,7 +107,7 @@ function RegisterProject() {
         <div className={styles.etc}>
           <h3>기타 참고사항</h3>
         </div>
-        <div>
+        <div className={styles.buttons}>
           <button onClick={postProject}>등록하기</button>
         </div>
       </main>

@@ -2,16 +2,21 @@
   margin: 0;
   padding: 0;
 }
+.inner {
+  display: flex;
+  width: 1200px;
+  overflow: scroll;
+}
 .projectSummary {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 200px;
-  height: 250px;
+  height: 220px;
   border: 3px solid #e0e0e0;
   border-radius: 10px;
   margin: 0 20px;
-  padding: 10px;
+  padding: 15px;
 }
 .photo {
   width: 150px;
@@ -19,12 +24,13 @@
   margin: 10px;
 }
 
-.mainletter{
+.mainletter {
   font-size: 18px;
   margin-bottom: 10px;
+  padding-left: 5px;
 }
 
-.subletter{
+.subletter {
   font-size: 14px;
   opacity: 0.5;
   margin: 10px;

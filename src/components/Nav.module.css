@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .navbar {
     width: 100vw;
     height: 40px;
@@ -20,11 +20,11 @@
     top: 0;
     left: 0;
   }
-  
-   .Logo {
+
+  .Logo {
     width: 30px;
   }
-  
+
   ul {
     display: flex;
     align-items: center;
@@ -37,7 +37,7 @@
     margin-left: 10px;
   }
 
-  ul> .userList {
+  ul > .userList {
     display: flex;
     justify-content: flex-end;
     width: 70vw;
@@ -54,24 +54,24 @@
     white-space: nowrap;
     margin-left: 10px;
   }
-  
+
   a {
     text-decoration: none;
     color: black;
   }
-  
+
   .navProject > a {
-    color: #C2A4FF;
+    color: #c2a4ff;
   }
 }
 
 /*태블릿*/
-@media (min-width: 768px) and (max-width: 991px){
+@media (min-width: 768px) and (max-width: 991px) {
   * {
     margin: 0;
     padding: 0;
   }
-  
+
   .navbar {
     width: 100vw;
     height: 40px;
@@ -86,11 +86,11 @@
     top: 0;
     left: 0;
   }
-  
-   .Logo {
+
+  .Logo {
     width: 30px;
   }
-  
+
   ul {
     display: flex;
     align-items: center;
@@ -103,7 +103,7 @@
     margin-left: 10px;
   }
 
-  ul> .userList {
+  ul > .userList {
     display: flex;
     justify-content: flex-end;
     width: 60vw;
@@ -120,14 +120,14 @@
     white-space: nowrap;
     margin-left: 10px;
   }
-  
+
   a {
     text-decoration: none;
     color: black;
   }
-  
+
   .navProject > a {
-    color: #C2A4FF;
+    color: #c2a4ff;
   }
 }
 
@@ -137,7 +137,7 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .navbar {
     width: 100vw;
     height: 40px;
@@ -152,11 +152,11 @@
     top: 0;
     left: 0;
   }
-  
-   .Logo {
+
+  .Logo {
     width: 30px;
   }
-  
+
   ul {
     display: flex;
     align-items: center;
@@ -169,7 +169,7 @@
     margin-left: 10px;
   }
 
-  ul> .userList {
+  ul > .userList {
     display: flex;
     justify-content: flex-end;
     width: 50vw;
@@ -186,13 +186,13 @@
     white-space: nowrap;
     margin-left: 10px;
   }
-  
+
   a {
     text-decoration: none;
     color: black;
   }
-  
+
   .navProject > a {
-    color: #C2A4FF;
+    color: #c2a4ff;
   }
 }

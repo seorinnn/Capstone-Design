@@ -19,8 +19,11 @@ function Nav() {
         <li className={styles.navProject}>
           <Link to="/ProjectList">프로젝트</Link>
         </li>
-        <li>
-          <Link to="/Question">질의응답</Link>
+        <li className={styles.navProject}>
+          <Link to="/StudyList">스터디</Link>
+        </li>
+        <li className={styles.navFree}>
+          <Link to="/FreeBoard">자유게시판</Link>
         </li>
         {/* <li className={styles.myPage}>
           <Link to="/MyPage">내 정보</Link>
