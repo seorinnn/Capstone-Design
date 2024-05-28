@@ -39,7 +39,7 @@ function RegisterProject() {
     });
   };
 
-  //직무 추가
+  //직무 추가 함수
   const addField = () => {
     setProjectInfo({
       ...projectInfo,
@@ -47,6 +47,7 @@ function RegisterProject() {
     });
   };
 
+  //이미지 파일 변경 함수
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImageFile(event.target.files[0]);
@@ -54,6 +55,7 @@ function RegisterProject() {
     }
   };
 
+  //게시글 등록 함수
   const postProject = async () => {
     const formData = new FormData();
     if (imageFile) {
