@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
 .header {
   margin: 30px;
@@ -38,41 +38,27 @@
 
 .formLogin input::placeholder {
   font-size: 17px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .formLogin input:focus {
-  border-color: #C2A4FF;
+  border-color: #c2a4ff;
   outline: none;
 }
 
-.formLogin  button {
+.formLogin button {
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: #C2A4FF;
+  background-color: #c2a4ff;
   width: 390px;
   height: 65px;
   margin-top: 20px;
   border: none;
   border-radius: 8px;
   font-size: 19px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
-}
-
-.simpleLogin {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 400px;
-  margin-top: 50px;
-}
-
-.simpleLogin > img {
-  width: 250px;
-  height: 60px;
-  margin-bottom: 10px;
+  cursor: pointer;
 }

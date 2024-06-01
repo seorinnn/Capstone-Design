@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 import Nav from "./components/Nav";
 import HomePage from "./pages/HomePage";
 import ProjectListPage from "./pages/ProjectListPage";
@@ -21,7 +22,7 @@ import StudyDetail from "./components/study/StudyDetail";
 
 function Main() {
   return (
-    <>
+    <AuthProvider>
       <BrowserRouter>
         <Nav />
         <Routes>
@@ -44,14 +45,14 @@ function Main() {
             element={<KakaoRedirectPage />}
           ></Route>
           <Route path="/RegisterPage" element={<RegisterPage />} />
-          <Route path="/FreeBoard" element={<FreeBoard/>} />
+          <Route path="/FreeBoard" element={<FreeBoard />} />
           <Route
             path="/BoardInformation/:boardslug"
             element={<BoardInformation />}
           />
         </Routes>
       </BrowserRouter>
-    </>
+    </AuthProvider>
   );
 }
 

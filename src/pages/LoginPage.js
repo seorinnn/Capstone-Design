@@ -2,12 +2,10 @@ import { useState } from "react";
 import axios from "../lib/axios";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
-import HorizonLine from "../components/HorizontalLine";
-import { AltRoute } from "@mui/icons-material";
 
 function LoginPage() {
   const [values, setValues] = useState({
-    email: "",
+    loginId: "",
     password: "",
   });
   const navigate = useNavigate();
@@ -23,28 +21,36 @@ function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const { email, password } = values;
+    const { loginId, password } = values;
 
     try {
-      const response = await axios.post("/member/login", { email, password });
+      const response = await axios.post("/api/members/sign-in", {
+        loginId,
+        password,
+      });
       const accessToken = response.data.accessToken;
       const refreshToken = response.data.refreshToken;
 
       //로컬 스토리지에 토큰 저장
-      localStorage.setItem("accssToken", accessToken);
+      localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
 
+      navigate("/");
+      //로그인 후 새로고침
+      window.location.reload();
       //로그인 후 마이페이지로 이동
-      // navigate("/MyPage");
       alert("로그인 성공");
+      console.log("resonse" + response);
+      console.log("accessToken : " + accessToken);
+      console.log("refreshToken : " + refreshToken);
     } catch (error) {
       alert("로그인 실패");
     }
   }
 
-  const handleKakaoLoginClick = () => {
-    window.location.href = "http://localhost:8080/oauth/kakao"; //페이지 리다이렉트
-  };
+  // const handleKakaoLoginClick = () => {
+  //   window.location.href = "http://localhost:8080/oauth/kakao"; //페이지 리다이렉트
+  // };
 
   return (
     <>
@@ -53,11 +59,11 @@ function LoginPage() {
         <section className={styles.formLogin}>
           <form onSubmit={handleSubmit}>
             <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="이메일"
-              value={values.email}
+              id="loginId"
+              name="loginId"
+              type="text"
+              placeholder="아이디"
+              value={values.loginId}
               onChange={handleChange}
             />
 
@@ -71,15 +77,6 @@ function LoginPage() {
             />
             <button type="submit">로그인</button>
           </form>
-        </section>
-        <section className={styles.simpleLogin}>
-          <HorizonLine text="간편 로그인" />
-          <img
-            alt="loginImg"
-            src={require(`../assets/kakaoLoginButton.png`)}
-            onClick={handleKakaoLoginClick}
-          />
-          <img alt="loginImg" src={require(`../assets/naverLoginButton.png`)} />
         </section>
       </div>
     </>
