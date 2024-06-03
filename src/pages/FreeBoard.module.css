@@ -1,5 +1,23 @@
+.FreeBoard{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+}
 .mainletter{
     padding-left: 30px;
     font-size: 32px;
     height: 50px;
+}
+.header {
+    display: flex;
+    justify-content: center;
+}
+.body {
+    padding-top: 100px;
+    padding-left: 200px;
+    padding-right: 200px;
+    display: flex;
+    flex-Direction: row;
+    justify-Content: space-between;
+    position: relative;
 }

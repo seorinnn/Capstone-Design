@@ -1,24 +1,14 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "../lib/axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import styles from "./UpdateProject.module.css";
 
 const UpdateProject = () => {
   const navigate = useNavigate();
   const { idx } = useParams();
-  const [project, setProject] = useState({});
-
-  //게시글 데이터 가져오기
-  const getProject = async () => {
-    const response = await axios.get(`/api/posts/${idx}`);
-    setProject(response.data);
-  };
-
-  useEffect(() => {
-    getProject();
-  }, []);
-
+  const fileInputRef = useRef();
+  const [imageFile, setImageFile] = useState(null);
+  const [defaultProjectImgSrc, setDefaultProjectImgSrc] = useState(null);
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
@@ -26,11 +16,24 @@ const UpdateProject = () => {
     fieldList: [],
   });
 
-  //비구조화 할당으로 projectInfo가 바로 값을 분해해 변수에 할당함
+  const getProject = async () => {
+    try {
+      const response = await axios.get(`/api/posts/${idx}`);
+      setProjectInfo(response.data);
+      setDefaultProjectImgSrc(response.data.image); // Assuming the image URL is part of the response
+    } catch (error) {
+      console.error("Error fetching project data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProject();
+  }, []);
+
   const { title, category, content, fieldList } = projectInfo;
 
   const onChange = (event) => {
-    const { value, name } = event.target; //event.target에서 name과 value만 가져옴
+    const { value, name } = event.target;
     setProjectInfo({
       ...projectInfo,
       [name]: value,
@@ -40,7 +43,6 @@ const UpdateProject = () => {
   const handleFieldListChange = (index, event) => {
     const { name, value } = event.target;
     const newFieldList = [...fieldList];
-    // 숫자로 변환해야 하는 필드인 경우 parseInt를 사용하여 숫자로 변환
     newFieldList[index][name] =
       name === "totalRecruitment" ? parseInt(value, 10) : value;
     setProjectInfo({
@@ -56,9 +58,38 @@ const UpdateProject = () => {
     });
   };
 
-  const updateProject = async () => {};
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageFile(event.target.files[0]);
+      setDefaultProjectImgSrc(URL.createObjectURL(event.target.files[0]));
+    }
+  };
 
-  const cancel = async () => {
+  const updateProject = async () => {
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    formData.append(
+      "json",
+      new Blob([JSON.stringify(projectInfo)], { type: "application/json" })
+    );
+
+    try {
+      await axios.patch(`/api/posts/${idx}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("수정되었습니다.");
+      navigate(`/ProjectInformation/${idx}`);
+    } catch (error) {
+      console.error("프로젝트 수정 중 오류가 발생했습니다.", error);
+    }
+  };
+
+  const cancel = () => {
     navigate("/ProjectList");
   };
 
@@ -72,7 +103,14 @@ const UpdateProject = () => {
       <main className={styles.RegisterProjectMain}>
         <div className={styles.projectImg}>
           <h3>배경사진 선택</h3>
-          <input type="file"></input>
+          {defaultProjectImgSrc && (
+            <img alt="profileImg" src={defaultProjectImgSrc} />
+          )}
+          <input
+            type="file"
+            onChange={handleImageChange}
+            ref={fileInputRef}
+          ></input>
         </div>
         <div className={styles.projectName}>
           <h3>프로젝트명</h3>
