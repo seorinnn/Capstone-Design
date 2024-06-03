@@ -38,7 +38,7 @@ function Main() {
           <Route path="/StudyList" element={<StudyListPage />} />
           <Route path="/RegisterStudy" element={<RegisterStudy />} />
           <Route path="/StudyInformation/:idx" element={<StudyDetail />} />
-          <Route path="/MyPage" element={<MyPage />} />
+          <Route path="/MyPage/:loginId" element={<MyPage />} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route
             path="/oauth/redirected/kakao"

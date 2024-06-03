@@ -28,10 +28,10 @@ const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
     }
   };
 
-  console.log(imageUrl);
+  //console.log(imageUrl);
   // imageUrl 객체에서 실제 이미지 경로 문자열을 추출
-  const imagePath = imageUrl.imageUrl;
-  console.log("imagePath : " + imagePath);
+  // const imagePath = imageUrl.imageUrl;
+  // console.log("imagePath : " + imagePath);
   //<img alt="projectImg" src={require(`../image/${imagePath}`)} />
 
   return (
@@ -43,7 +43,6 @@ const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
         <header className={styles.projectInfoHeader}>
           <div className={styles.headerInfo}>
             <div className={styles.headerInfoTitle}>
-              <img alt="projectImg" src={`../image/${imagePath}`} />
 
               <h1>{title}</h1>
             </div>
