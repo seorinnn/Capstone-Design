@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 import Nav from "./components/Nav";
 import HomePage from "./pages/HomePage";
 import ProjectListPage from "./pages/ProjectListPage";
@@ -21,7 +22,7 @@ import StudyDetail from "./components/study/StudyDetail";
 
 function Main() {
   return (
-    <>
+    <AuthProvider>
       <BrowserRouter>
         <Nav />
         <Routes>
@@ -37,21 +38,21 @@ function Main() {
           <Route path="/StudyList" element={<StudyListPage />} />
           <Route path="/RegisterStudy" element={<RegisterStudy />} />
           <Route path="/StudyInformation/:idx" element={<StudyDetail />} />
-          <Route path="/MyPage" element={<MyPage />} />
+          <Route path="/MyPage/:loginId" element={<MyPage />} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route
             path="/oauth/redirected/kakao"
             element={<KakaoRedirectPage />}
           ></Route>
           <Route path="/RegisterPage" element={<RegisterPage />} />
-          <Route path="/FreeBoard" element={<FreeBoard/>} />
+          <Route path="/FreeBoard" element={<FreeBoard />} />
           <Route
             path="/BoardInformation/:boardslug"
             element={<BoardInformation />}
           />
         </Routes>
       </BrowserRouter>
-    </>
+    </AuthProvider>
   );
 }
 

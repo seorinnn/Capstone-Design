@@ -15,7 +15,6 @@
 
 .RegisterProjectMain .projectImg {
   display: flex;
-  position: relative;
   margin-bottom: 20px;
 }
 
@@ -28,9 +27,6 @@
 }
 
 .RegisterProjectMain .projectImg input {
-  position: absolute;
-  left: 350px;
-  top: 60px;
 }
 
 .RegisterProjectMain .projectName input {
