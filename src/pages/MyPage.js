@@ -18,7 +18,7 @@ function MyPage() {
 
         if (token) {
           //토큰이 있다면 서버에 GET 요청 보내 유저 정보 가져옴
-          const response = await axios.get("/user/member-info", {
+          const response = await axios.get(`/api/members/:memberid`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

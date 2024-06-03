@@ -19,6 +19,11 @@
   justify-content: center;
 }
 
+.searchProject {
+  display: flex;
+  justify-content: center;
+}
+
 .mainletter {
   text-align: center;
   font-size: 32px;

@@ -1,44 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../lib/axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
 import styles from "./Applycation.module.css";
 
 const Applycation = () => {
   const navigate = useNavigate();
   const { idx } = useParams();
-  const [project, setProject] = useState({});
-
   const [applyInfo, setApplyInfo] = useState({
     category: "PROJECT",
     content: "",
-    fieldCategory: "BACKEND",
+    fieldCategory: ""
+  });
+  const [projectInfo, setProjectInfo] = useState({
+    title: "",
+    fieldList: []
   });
 
-  //비구조화 할당으로 applyInfo가 바로 값을 분해해 변수에 할당함
-  const { category, content } = applyInfo;
+  useEffect(() => {
+    const getProject = async () => {
+      try {
+        const response = await axios.get(`/api/posts/${idx}`);
+        setProjectInfo(response.data);
+        // Extracting field category from the fetched project information
+        const fieldCategory = response.data.fieldList.map(field => field.fieldCategory).join(", ");
+        setApplyInfo(prevState => ({
+          ...prevState,
+          fieldCategory
+        }));
+      } catch (error) {
+        console.error("Error fetching project:", error);
+      }
+    };
 
-  const onChange = (event) => {
-    const { value, name } = event.target; //event.target에서 name과 value만 가져옴
-    setApplyInfo({
-      ...applyInfo,
-      [name]: value,
-    });
+    getProject();
+  }, [idx]);
+
+  const { category, content, fieldCategory } = applyInfo;
+  const { title } = projectInfo;
+
+  const onChange = event => {
+    const { value, name } = event.target;
+    setApplyInfo(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
-  //지원서 취소하기
-  const cancel = async () => {
+  const cancel = () => {
     if (window.confirm("작업을 그만 두시겠습니까?")) {
       navigate(`/ProjectInformation/${idx}`);
     }
   };
-  //지원서 작성하기
+
   const complete = async () => {
     if (window.confirm("지원서를 보내시겠습니까?")) {
-      await axios.post(`/api/applies/apply/${idx}`, applyInfo).then((res) => {
+      try {
+        await axios.post(`/api/applies/apply/${idx}`, applyInfo);
         alert("전송되었습니다.");
         navigate(`/ProjectInformation/${idx}`);
-      });
+      } catch (error) {
+        console.error("Error submitting application:", error);
+      }
     }
   };
 
@@ -46,6 +68,11 @@ const Applycation = () => {
     <>
       <div className={styles.Applycation}>
         <h1 className={styles.header}>지원서 작성하기</h1>
+      </div>
+      <div>
+        <h2>제목 : {title}</h2>
+        <h2>카테고리 : {category}</h2>
+        <h2>지원 : {fieldCategory}</h2>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <textarea

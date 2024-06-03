@@ -1,16 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
 .header {
   margin: 30px;
   white-space: nowrap;
 }
 
-.loginPage {
+.registerPage {
   margin: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+form {
+  position: relative;
+  padding: 0px 90px;
 }
 
 .formLogin > form {
@@ -35,43 +40,49 @@
   font-size: 17px;
 }
 
+.formLogin .btn {
+  position: absolute;
+  width: 90px;
+  height: 30px;
+  border: 1px solid #424242;
+  border-radius: 7px;
+  background-color: white;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.formLogin .nickBtn {
+  top: 105px;
+  right: 0px;
+}
+
+.formLogin .idBtn {
+  top: 270px;
+  right: 0px;
+}
+
 .formLogin input::placeholder {
   font-size: 17px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .formLogin input:focus {
-  border-color: #C2A4FF;
+  border-color: #c2a4ff;
   outline: none;
 }
 
-.formLogin button {
+.formLogin .submitButton {
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: #C2A4FF;
+  background-color: #c2a4ff;
   width: 390px;
   height: 65px;
   margin-top: 20px;
   border: none;
   border-radius: 8px;
   font-size: 19px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
+  cursor: pointer;
 }
-.simpleLogin {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 400px;
-  margin-top: 50px;
-}
-
-.simpleLogin > img {
-  width: 250px;
-  height: 60px;
-  margin-bottom: 10px;
-}
-

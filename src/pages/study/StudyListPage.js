@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./StudyListPage.module.css";
 import StudySummary from "../../components/study/StudySummary";
+import SearchStudy from "../../components/SearchStudy";
 
 function StudyListPage() {
   // const [studyList, setStudyList] = useState([]);
@@ -35,7 +36,12 @@ function StudyListPage() {
         <div className={styles.likeProject}>
           <StudySummary />
         </div>
+        <h1 className={styles.mainletter}>검색</h1>
+        <div className={styles.searchProject}>
+          <SearchStudy />
+        </div>
       </div>
+      
 
       <button onClick={moveToResisterStudy}>스터디 등록하기</button>
     </>

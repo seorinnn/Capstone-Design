@@ -28,10 +28,10 @@ function ProjectListPage() {
         <div className={styles.likeProject}>
           <ProjectSummary />
         </div>
-      </div>
-      <div>
         <h1 className={styles.mainletter}>검색</h1>
-        <Search />
+        <div className={styles.searchProject}>
+          <Search />
+        </div>
       </div>
     </>
   );

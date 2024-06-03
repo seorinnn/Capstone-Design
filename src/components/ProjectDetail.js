@@ -18,6 +18,8 @@ function ProjectDetail() {
     }
   };
 
+  console.log(project.image);
+
   useEffect(() => {
     getProject();
   }, []);
@@ -28,6 +30,7 @@ function ProjectDetail() {
         title={project.title}
         content={project.content}
         fieldList={project.fieldList}
+        imageUrl={project.image} // 이미지 URL 추가
       />
     </div>
   );
