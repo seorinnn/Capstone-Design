@@ -12,3 +12,12 @@
     display: flex;
     justify-content: center;
 }
+.body {
+    padding-top: 100px;
+    padding-left: 200px;
+    padding-right: 200px;
+    display: flex;
+    flex-Direction: row;
+    justify-Content: space-between;
+    position: relative;
+}

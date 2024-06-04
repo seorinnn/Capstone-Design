@@ -4,20 +4,21 @@ import axios from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const Project = ({ title, content }) => {
+const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
   const navigate = useNavigate();
   const { idx } = useParams();
+  console.log(imageUrl);
 
-  //수정 화면으로 이동
+  // 수정 화면으로 이동
   const moveToUpdate = () => {
     navigate(`/UpdateProject/${idx}`);
   };
+
   const moveToApply = () => {
-    navigate(`/Applycation/${idx}`);
+    navigate(`/Application/${idx}`);
   };
 
-
-  //게시글 삭제하기
+  // 게시글 삭제하기
   const deleteProject = async () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       await axios.delete(`/api/posts/${idx}`).then((res) => {
@@ -27,6 +28,12 @@ const Project = ({ title, content }) => {
     }
   };
 
+  //console.log(imageUrl);
+  // imageUrl 객체에서 실제 이미지 경로 문자열을 추출
+  // const imagePath = imageUrl.imageUrl;
+  // console.log("imagePath : " + imagePath);
+  //<img alt="projectImg" src={require(`../image/${imagePath}`)} />
+
   return (
     <>
       <div className={styles.projectInformation}>
@@ -34,9 +41,9 @@ const Project = ({ title, content }) => {
           <p>채용 상태</p>
         </div>
         <header className={styles.projectInfoHeader}>
-          <img alt="projectImg" src={require(`../assets/paletteLogo.png`)} />
           <div className={styles.headerInfo}>
             <div className={styles.headerInfoTitle}>
+
               <h1>{title}</h1>
             </div>
             <p>사용자 정보</p>
@@ -47,7 +54,6 @@ const Project = ({ title, content }) => {
             <h3 className={styles.sectionTitle}>프로젝트 소개 및 기간</h3>
             <hr />
             <div className={styles.contents}>
-              <p className={styles.period}>기간 :</p>
               <p>{content}</p>
             </div>
           </div>
@@ -55,10 +61,15 @@ const Project = ({ title, content }) => {
             <h3 className={styles.sectionTitle}>현재 모집 현황</h3>
             <hr />
             <div className={styles.contents}>
-              <div className={styles.recruitmentDiv}>
-                <p>지원</p>
-                <button onClick={moveToApply}>지원</button>
-              </div>
+              {fieldList.map((field, index) => (
+                <div key={index} className={styles.recruitmentDiv}>
+                  <p>{field.fieldCategory}</p>
+                  <p>
+                    {field.currentRecruitment} / {field.totalRecruitment}
+                  </p>
+                  <button onClick={moveToApply}>지원</button>
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.section}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./RegisterProject.module.css";
 import defaultProjectImg from "../assets/DefaultProjectImg.jpg";
 import axios from "../lib/axios";
@@ -6,22 +6,22 @@ import { useNavigate } from "react-router-dom";
 
 function RegisterProject() {
   const navigate = useNavigate();
-  //프로젝트 배경이미지
+  const fileInputRef = useRef();
+  const [imageFile, setImageFile] = useState(null);
   const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
     useState(defaultProjectImg);
-
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
     content: "",
     fieldList: [],
+    imageUrl: "", // 이미지 URL 추가
   });
 
-  //비구조화 할당으로 projectInfo가 바로 값을 분해해 변수에 할당함
   const { title, category, content, fieldList } = projectInfo;
 
   const onChange = (event) => {
-    const { value, name } = event.target; //event.target에서 name과 value만 가져옴
+    const { value, name } = event.target;
     setProjectInfo({
       ...projectInfo,
       [name]: value,
@@ -31,7 +31,6 @@ function RegisterProject() {
   const handleFieldListChange = (index, event) => {
     const { name, value } = event.target;
     const newFieldList = [...fieldList];
-    // 숫자로 변환해야 하는 필드인 경우 parseInt를 사용하여 숫자로 변환
     newFieldList[index][name] =
       name === "totalRecruitment" ? parseInt(value, 10) : value;
     setProjectInfo({
@@ -40,6 +39,7 @@ function RegisterProject() {
     });
   };
 
+  //직무 추가
   const addField = () => {
     setProjectInfo({
       ...projectInfo,
@@ -47,11 +47,44 @@ function RegisterProject() {
     });
   };
 
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageFile(event.target.files[0]);
+      setDefaultProjectImgSrc(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
   const postProject = async () => {
-    await axios.post(`/api/posts`, projectInfo).then((res) => {
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    // projectInfo 객체를 Blob 형태로 변환하여 formData에 추가
+    formData.append(
+      "json",
+      new Blob([JSON.stringify(projectInfo)], { type: "application/json" })
+    );
+
+    try {
+      const res = await axios.post(`/api/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      // 서버로부터 이미지 URL을 받아서 projectInfo에 저장
+      const updatedProjectInfo = {
+        ...projectInfo,
+        imageUrl: res.data.imageUrl, // 서버에서 반환된 이미지 URL을 저장
+      };
+      setProjectInfo(updatedProjectInfo);
+
       alert("등록되었습니다.");
       navigate("/ProjectList");
-    });
+    } catch (error) {
+      console.error("프로젝트 등록 중 오류가 발생했습니다.", error);
+    }
   };
 
   return (
@@ -65,7 +98,11 @@ function RegisterProject() {
         <div className={styles.projectImg}>
           <h3>배경사진 선택</h3>
           <img alt="profileImg" src={defaultProjectImgSrc} />
-          <input type="file"></input>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            ref={fileInputRef}
+          ></input>
         </div>
         <div className={styles.projectName}>
           <h3>프로젝트명</h3>
