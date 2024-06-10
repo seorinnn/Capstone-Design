@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "../lib/axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import styles from "./Applycation.module.css";
 
 const Applycation = () => {
   const navigate = useNavigate();
   const { idx } = useParams();
+  const location = useLocation();
+  const fieldCategoryFromState = location.state?.fieldCategory || ""; // Get the fieldCategory from state
+
   const [applyInfo, setApplyInfo] = useState({
     category: "PROJECT",
     content: "",
-    fieldCategory: ""
+    fieldCategory: fieldCategoryFromState // Initialize with fieldCategory from state
   });
   const [projectInfo, setProjectInfo] = useState({
     title: "",
@@ -21,12 +24,6 @@ const Applycation = () => {
       try {
         const response = await axios.get(`/api/posts/${idx}`);
         setProjectInfo(response.data);
-        // Extracting field category from the fetched project information
-        const fieldCategory = response.data.fieldList.map(field => field.fieldCategory).join(", ");
-        setApplyInfo(prevState => ({
-          ...prevState,
-          fieldCategory
-        }));
       } catch (error) {
         console.error("Error fetching project:", error);
       }

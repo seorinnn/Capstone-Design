@@ -1,0 +1,56 @@
+.conversation-list{
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.conversation-list-container{
+  margin-top: 100px;
+
+}
+
+.conversation-list h2 {
+  text-align: center;
+  
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.conversation-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.conversation-item {
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.conversation-item:hover {
+  background-color: #e2e6ea;
+  transform: translateY(-2px);
+}
+
+.nickname {
+  font-weight: bold;
+  color: #495057;
+}
+
+.recent-message-time {
+  color: #868e96;
+  font-size: 0.9em;
+}

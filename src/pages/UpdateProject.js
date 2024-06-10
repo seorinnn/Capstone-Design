@@ -14,6 +14,8 @@ const UpdateProject = () => {
     category: "PROJECT",
     content: "",
     fieldList: [],
+    startDate: "",
+    endDate: "",
   });
 
   const getProject = async () => {
@@ -30,7 +32,7 @@ const UpdateProject = () => {
     getProject();
   }, []);
 
-  const { title, category, content, fieldList } = projectInfo;
+  const { title, category, content, fieldList, startDate, endDate } = projectInfo;
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -123,6 +125,24 @@ const UpdateProject = () => {
             cols="30"
             rows="10"
             value={content}
+            onChange={onChange}
+          />
+        </div>
+        <div className={styles.projectDate}>
+          <h3>프로젝트 시작일</h3>
+          <input
+            type="date"
+            name="startDate"
+            value={startDate}
+            onChange={onChange}
+          />
+        </div>
+        <div className={styles.projectDate}>
+          <h3>프로젝트 종료일</h3>
+          <input
+            type="date"
+            name="endDate"
+            value={endDate}
             onChange={onChange}
           />
         </div>
