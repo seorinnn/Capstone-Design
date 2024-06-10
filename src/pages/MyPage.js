@@ -14,7 +14,7 @@ function MyPage() {
     const fetchUserData = async () => {
       try {
         //로컬 스토리지에서 토큰 가져오기
-        const token = localStorage.getItem("accssToken");
+        const token = localStorage.getItem("accessToken");
         console.log(token);
 
         if (token) {
