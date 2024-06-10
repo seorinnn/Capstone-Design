@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import styles from "./StudyListPage.module.css";
 import StudySummary from "../../components/study/StudySummary";
 import SearchStudy from "../../components/SearchStudy";
@@ -19,12 +18,6 @@ function StudyListPage() {
   //   getStudyList();
   // }, []);
 
-  //등록하기 버튼 함수
-  const navigate = useNavigate();
-  function moveToResisterStudy() {
-    navigate("/RegisterStudy");
-  }
-
   return (
     <>
       <div className={styles.projectListPage}>
@@ -37,13 +30,10 @@ function StudyListPage() {
           <StudySummary />
         </div>
         <h1 className={styles.mainletter}>검색</h1>
-        <div className={styles.searchProject}>
+        <div className={styles.searchStudy}>
           <SearchStudy />
         </div>
       </div>
-      
-
-      <button onClick={moveToResisterStudy}>스터디 등록하기</button>
     </>
   );
 }

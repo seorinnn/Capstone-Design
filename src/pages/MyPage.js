@@ -15,10 +15,11 @@ function MyPage() {
       try {
         //로컬 스토리지에서 토큰 가져오기
         const token = localStorage.getItem("accssToken");
+        console.log(token);
 
         if (token) {
           //토큰이 있다면 서버에 GET 요청 보내 유저 정보 가져옴
-          const response = await axios.get(`/api/members/:memberid`, {
+          const response = await axios.get("/api/members/member", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -52,7 +53,7 @@ function MyPage() {
           <img alt="profileImg" src={require(`../assets/profileImg.avif`)} />
           <div className={styles.profileInfo}>
             <section className={styles.section1}>
-              <h2>{user.name}</h2>
+              <h2>{user?.username}</h2>
               <p className={styles.major}>(전공자)</p>
               <img alt="heart" src={imageSrc} onClick={handleClick} />
             </section>
@@ -63,7 +64,7 @@ function MyPage() {
               </p>
             </section>
             <section className={styles.section3}>
-              <h2>내 직무</h2>
+              <h2>내 전공</h2>
               <p>웹 프론트엔드</p>
             </section>
             <section className={styles.section4}>

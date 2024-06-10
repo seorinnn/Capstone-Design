@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import axios from "../lib/axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./BoardRegister.module.css";
 
 const BoardRegister = () => {
   const navigate = useNavigate();
+  const fileInputRef = useRef();
+  const [imageFile, setImageFile] = useState(null);
   
   const [boardInfo, setBoardInfo] = useState({
     title: "",
@@ -23,12 +25,36 @@ const BoardRegister = () => {
     });
   };
 
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageFile(event.target.files[0]);
+    }
+  };
+
   const complete = async () => {
-    await axios.post(`/api/posts`, boardInfo).then((res) => {
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    formData.append(
+      "json",
+      new Blob([JSON.stringify(boardInfo)], { type: "application/json" })
+    );
+
+    try {
+      const res = await axios.post(`/api/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       alert("등록되었습니다.");
       console.log(boardInfo);
       navigate("/FreeBoard");
-    });
+    } catch (error) {
+      console.error("게시글 등록 중 오류가 발생했습니다.", error);
+    }
   };
 
   const cancel = () => {

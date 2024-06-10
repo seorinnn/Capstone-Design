@@ -12,6 +12,12 @@
     display: flex;
     justify-content: center;
 }
+
+.searchBoard {
+    display: flex;
+    justify-content: center;
+}
+
 .body {
     padding-top: 100px;
     padding-left: 200px;

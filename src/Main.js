@@ -20,6 +20,7 @@ import StudyDetail from "./components/study/StudyDetail";
 import BoardRegister from "./pages/BoardRegister";
 import BoardDetail from "./components/BoardDetail";
 import BoardUpdate from "./pages/BoardUpdate";
+import ManualPage from "./pages/ManualPage";
 
 function Main() {
   return (
@@ -28,26 +29,32 @@ function Main() {
         <Nav />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/Manual" element={<ManualPage />} />
+
           <Route path="/ProjectList" element={<ProjectListPage />} />
+          <Route path="/RegisterProject" element={<RegisterProject />} />
+          <Route path="/UpdateProject/:idx" element={<UpdateProject />} />
+          <Route path="/ProjectInformation/:idx" element={<ProjectDetail />} />
+
           <Route path="/Question" element={<QuestionPage />} />
           <Route path="/Question/list" element={<QuestionPage />} />
           <Route path="/Question/read/:qno" element={<QuestionRead />} />
-          <Route path="/RegisterProject" element={<RegisterProject />} />
-          <Route path="/UpdateProject/:idx" element={<UpdateProject />} />
-          <Route path="/BoardUpdate/:idx" element={<BoardUpdate />} />
-          <Route path="/ProjectInformation/:idx" element={<ProjectDetail />} />
-          <Route path="/Applycation/:idx" element={<Applycation />} />
+          
           <Route path="/StudyList" element={<StudyListPage />} />
           <Route path="/RegisterStudy" element={<RegisterStudy />} />
           <Route path="/StudyInformation/:idx" element={<StudyDetail />} />
-          <Route path="/MyPage/:loginId" element={<MyPage />} />
+         
+          <Route path="/Applycation/:idx" element={<Applycation />} />
+          <Route path="/MyPage" element={<MyPage />} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route
             path="/oauth/redirected/kakao"
             element={<KakaoRedirectPage />}
           ></Route>
           <Route path="/RegisterPage" element={<RegisterPage />} />
-          <Route path="/FreeBoard" element={<FreeBoard/>} />
+         
+          <Route path="/FreeBoard" element={<FreeBoard/>} /> 
+          <Route path="/BoardUpdate/:idx" element={<BoardUpdate />} />
           <Route path="/BoardRegister" element={<BoardRegister/>} />
           <Route
             path="/BoardInformation/:idx"

@@ -10,12 +10,13 @@ function RegisterProject() {
   const [imageFile, setImageFile] = useState(null);
   const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
     useState(defaultProjectImg);
+
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
     content: "",
     fieldList: [],
-    imageUrl: "", // 이미지 URL 추가
+    imageUrl: "" // 이미지 URL 추가
   });
 
   const { title, category, content, fieldList } = projectInfo;
@@ -87,6 +88,12 @@ function RegisterProject() {
     }
   };
 
+  const cancel = () => {
+    if (window.confirm("작업을 그만 두시겠습니까?")) {
+      navigate(`/ProjectList`);
+    }
+  };
+
   return (
     <>
       <div className={styles.RegisterProjectHeader}>
@@ -146,6 +153,7 @@ function RegisterProject() {
         </div>
         <div>
           <button onClick={postProject}>등록하기</button>
+          <button onClick={cancel}>취소하기</button>
         </div>
       </main>
     </>
