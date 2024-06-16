@@ -78,3 +78,34 @@
   height: 100px;
   margin-top: 15px;
 }
+
+.inner {
+  display: flex;
+  width: 600px;
+  overflow: scroll;
+  margin-top: 15px;
+}
+
+.projectSummary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 120px;
+  border: 3px solid #e0e0e0;
+  border-radius: 10px;
+  margin: 0 20px;
+  padding: 15px;
+}
+
+.photo {
+  width: 150px;
+  height: 100px;
+  margin: 10px;
+}
+
+.pmainletter {
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}

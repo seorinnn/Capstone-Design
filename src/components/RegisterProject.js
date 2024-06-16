@@ -8,18 +8,18 @@ function RegisterProject() {
   const navigate = useNavigate();
   const fileInputRef = useRef();
   const [imageFile, setImageFile] = useState(null);
-  const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
-    useState(defaultProjectImg);
-
+  const [defaultProjectImgSrc, setDefaultProjectImgSrc] = useState(defaultProjectImg);
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
     content: "",
     fieldList: [],
-    imageUrl: "" // 이미지 URL 추가
+    startDate: "",
+    endDate: "",
+    imageUrl: "", // 이미지 URL 추가
   });
 
-  const { title, category, content, fieldList } = projectInfo;
+  const { title, content, fieldList, startDate, endDate } = projectInfo;
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -32,8 +32,7 @@ function RegisterProject() {
   const handleFieldListChange = (index, event) => {
     const { name, value } = event.target;
     const newFieldList = [...fieldList];
-    newFieldList[index][name] =
-      name === "totalRecruitment" ? parseInt(value, 10) : value;
+    newFieldList[index][name] = name === "totalRecruitment" ? parseInt(value, 10) : value;
     setProjectInfo({
       ...projectInfo,
       fieldList: newFieldList,
@@ -62,10 +61,7 @@ function RegisterProject() {
     }
 
     // projectInfo 객체를 Blob 형태로 변환하여 formData에 추가
-    formData.append(
-      "json",
-      new Blob([JSON.stringify(projectInfo)], { type: "application/json" })
-    );
+    formData.append("json", new Blob([JSON.stringify(projectInfo)], { type: "application/json" }));
 
     try {
       const res = await axios.post(`/api/posts`, formData, {
@@ -85,12 +81,6 @@ function RegisterProject() {
       navigate("/ProjectList");
     } catch (error) {
       console.error("프로젝트 등록 중 오류가 발생했습니다.", error);
-    }
-  };
-
-  const cancel = () => {
-    if (window.confirm("작업을 그만 두시겠습니까?")) {
-      navigate(`/ProjectList`);
     }
   };
 
@@ -124,6 +114,14 @@ function RegisterProject() {
             value={content}
             onChange={onChange}
           />
+          <div>
+            <label>시작 날짜:</label>
+            <input type="date" name="startDate" value={startDate} onChange={onChange} />
+          </div>
+          <div>
+            <label>종료 날짜:</label>
+            <input type="date" name="endDate" value={endDate} onChange={onChange} />
+          </div>
         </div>
         <div className={styles.recruitmentDiv}>
           <h3>모집 직무</h3>
@@ -153,7 +151,6 @@ function RegisterProject() {
         </div>
         <div>
           <button onClick={postProject}>등록하기</button>
-          <button onClick={cancel}>취소하기</button>
         </div>
       </main>
     </>
