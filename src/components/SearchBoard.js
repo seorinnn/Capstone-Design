@@ -79,7 +79,7 @@ function SearchBoard() {
             <input
               className={styles.search}
               type="text"
-              placeholder="검색"
+              placeholder="궁금한 게시글을 검색해보세요!"
               value={search}
               onChange={onSearchtext}
               onKeyDown={handleKeyDown}
