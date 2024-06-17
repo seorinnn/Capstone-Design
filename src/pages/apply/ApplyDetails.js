@@ -52,6 +52,14 @@ const ApplyDetails = () => {
     }
   };
 
+  const goToPostDetail = () => {
+    if (apply.postCategory === "스터디") {
+      navigate(`/StudyInformation/${apply.postId}`);
+    } else if (apply.postCategory === "프로젝트") {
+      navigate(`/ProjectInformation/${apply.postId}`);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -59,6 +67,9 @@ const ApplyDetails = () => {
     <div className="apply-details-container">
       <h1>지원 상세</h1>
       <div className="apply-details">
+        <p>
+          <h2>{apply.postTitle}관련 지원서입니다.</h2>
+        </p>
         <p>
           <strong>지원 분야:</strong> {apply.fieldCategory}
         </p>
@@ -71,7 +82,8 @@ const ApplyDetails = () => {
         <div className="button-group">
           <button onClick={() => updateApplyStatus("ACCEPT")}>지원 수락</button>
           <button onClick={() => updateApplyStatus("REJECT")}>지원 반려</button>
-          <button onClick={startConversation}>지원자와 채팅</button>{" "}
+          <button onClick={startConversation}>지원자와 채팅</button>
+          <button onClick={goToPostDetail}>지원한 게시글 바로가기</button>{" "}
           {/* New button */}
         </div>
       </div>
