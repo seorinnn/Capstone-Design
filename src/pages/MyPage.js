@@ -48,7 +48,6 @@ function MyPage() {
       <div
         className={`${styles.profile} ${styles.flexColumn} ${styles.flexCenter}`}
       >
-        <img alt="profileImg" src={require(`../assets/profileImg.avif`)} />
         <div className={styles.profileInfo}>
           <section className={styles.section1}>
             <h2>{user?.nickname}</h2>
@@ -78,7 +77,7 @@ function MyPage() {
                   <img
                     className={styles.photo}
                     alt="img"
-                    src={require(`../assets/DefaultProjectImg.jpg`)}
+                    src={require(`../assets/DefaultProjectImg.png`)}
                   />
                   <p className={styles.pmainletter}>{project.title}</p>
                 </Link>
@@ -96,7 +95,7 @@ function MyPage() {
                   <img
                     className={styles.photo}
                     alt="img"
-                    src={require(`../assets/DefaultProjectImg.jpg`)}
+                    src={require(`../assets/DefaultProjectImg.png`)}
                   />
                   <p className={styles.pmainletter}>{project.title}</p>
                 </Link>
@@ -114,7 +113,7 @@ function MyPage() {
                   <img
                     className={styles.photo}
                     alt="img"
-                    src={require(`../assets/DefaultProjectImg.jpg`)}
+                    src={require(`../assets/DefaultProjectImg.png`)}
                   />
                   <p className={styles.pmainletter}>{project.title}</p>
                 </Link>
