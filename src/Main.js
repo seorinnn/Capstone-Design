@@ -8,6 +8,7 @@ import ProjectDetail from "./components/ProjectDetail";
 import UpdateProject from "./pages/UpdateProject";
 import StudyListPage from "./pages/study/StudyListPage";
 import RegisterStudy from "./components/study/RegisterStudy";
+import UpdateStudy from "./pages/study/UpdateStudy";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -21,7 +22,7 @@ import BoardRegister from "./pages/BoardRegister";
 import BoardDetail from "./components/BoardDetail";
 import BoardUpdate from "./pages/BoardUpdate";
 import ManualPage from "./pages/ManualPage";
-import ConversationApp from './pages/message//ConversationApp'; // Import your ConversationApp component
+import ConversationApp from "./pages/message//ConversationApp"; // Import your ConversationApp component
 import ConversationsList from "./pages/message/ConversationList";
 import AppliesList from "./pages/apply/AppliesList";
 import ApplyDetails from "./pages/apply/ApplyDetails";
@@ -46,6 +47,7 @@ function Main() {
           <Route path="/Question/read/:qno" element={<QuestionRead />} />
           <Route path="/StudyList" element={<StudyListPage />} />
           <Route path="/RegisterStudy" element={<RegisterStudy />} />
+          <Route path="/UpdateStudy/:idx" element={<UpdateStudy />} />
           <Route path="/StudyInformation/:idx" element={<StudyDetail />} />
           <Route path="/Applycation/:idx" element={<Applycation />} />
           <Route path="/MyPage" element={<MyPage />} />

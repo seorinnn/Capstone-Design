@@ -97,10 +97,10 @@ const Project = ({
       <footer>
         <div className={styles.inner}>
           <button onClick={moveToUpdate} className={styles.btn}>
-            수정
+            수정하기
           </button>
           <button onClick={deleteProject} className={styles.btn}>
-            삭제
+            삭제하기
           </button>
         </div>
       </footer>

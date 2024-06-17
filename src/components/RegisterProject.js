@@ -116,8 +116,8 @@ function RegisterProject() {
             value={content}
             onChange={onChange}
           />
-          <div>
-            <label>시작 날짜:</label>
+          <div className={styles.date}>
+            <h3>프로젝트 시작일</h3>
             <input
               type="date"
               name="startDate"
@@ -125,8 +125,8 @@ function RegisterProject() {
               onChange={onChange}
             />
           </div>
-          <div>
-            <label>종료 날짜:</label>
+          <div className={styles.date}>
+            <h3>프로젝트 종료일</h3>
             <input
               type="date"
               name="endDate"

@@ -24,7 +24,7 @@ function Nav() {
           />
         </li>
         <li className={styles.homeLogo}>
-          <Link to="/">Palette</Link>
+          <Link to="/">Dorikkiri</Link>
         </li>
         <li className={styles.navProject}>
           <Link to="/ProjectList">프로젝트</Link>
@@ -38,13 +38,19 @@ function Nav() {
         <div className={styles.userList}>
           {isLoggedIn ? (
             <>
-              <li className={styles.appliesList}> {/* New Link */}
+              <li className={styles.appliesList}>
+                {" "}
+                {/* New Link */}
                 <Link to="/appliesList/my">내 지원 내역</Link>
               </li>
-              <li className={styles.appliesList}> {/* New Link */}
+              <li className={styles.appliesList}>
+                {" "}
+                {/* New Link */}
                 <Link to="/appliesList">지원 목록</Link>
               </li>
-              <li className={styles.conversation}> {/* New Link */}
+              <li className={styles.conversation}>
+                {" "}
+                {/* New Link */}
                 <Link to="/conversation">대화 목록</Link>
               </li>
               <li className={styles.myPage}>

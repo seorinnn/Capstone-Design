@@ -55,6 +55,25 @@ body {
   resize: none;
 }
 
+.RegisterProjectMain .date {
+  display: flex;
+  flex-direction: column;
+}
+
+.RegisterProjectMain .date h3 {
+  margin-bottom: 0;
+}
+
+.RegisterProjectMain .date input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
 .RegisterProjectMain .recruitmentDiv {
   margin-bottom: 20px;
 }
@@ -155,7 +174,7 @@ body {
 .buttonDiv .cancelButton {
   font-size: 1.2rem;
   font-weight: 700;
-  color: black;
+  color: #333;
   background-color: transparent;
   border: 1px solid #c2a4ff;
   padding: 10px 30px;

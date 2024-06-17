@@ -109,10 +109,12 @@ footer .btn {
   padding: 10px 20px;
   background-color: transparent;
   color: black;
-  border: 2px solid #c2a4ff;
+  border: 1px solid #c2a4ff;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 footer .btn:hover {
@@ -125,12 +127,12 @@ footer .btn:hover {
   padding: 8px 15px;
   background-color: transparent;
   color: #333;
-  border: 2px solid #ff7043;
+  border: 2px solid #bbdefb;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .chatButton:hover {
-  background-color: #e64a19;
+  background-color: #bbdefb;
 }

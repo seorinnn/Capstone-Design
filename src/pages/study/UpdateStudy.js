@@ -53,20 +53,6 @@ const UpdateStudy = () => {
     });
   };
 
-  const addField = () => {
-    setStudyInfo({
-      ...studyInfo,
-      fieldList: [...fieldList, { fieldCategory: "", totalRecruitment: 0 }],
-    });
-  };
-
-  const handleImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImageFile(event.target.files[0]);
-      setDefaultStudyImgSrc(URL.createObjectURL(event.target.files[0]));
-    }
-  };
-
   const updateStudy = async () => {
     const formData = new FormData();
     if (imageFile) {
@@ -97,23 +83,12 @@ const UpdateStudy = () => {
 
   return (
     <>
-      <div className={styles.RegisterStudyHeader}>
+      <div className={styles.registerStudyHeader}>
         <header>
           <h1>스터디 수정하기</h1>
         </header>
       </div>
-      <main className={styles.RegisterStudyMain}>
-        <div className={styles.studyImg}>
-          <h3>배경사진 선택</h3>
-          {defaultStudyImgSrc && (
-            <img alt="profileImg" src={defaultStudyImgSrc} />
-          )}
-          <input
-            type="file"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-          ></input>
-        </div>
+      <main className={styles.registerStudyMain}>
         <div className={styles.studyName}>
           <h3>스터디명</h3>
           <input type="text" name="title" value={title} onChange={onChange} />
@@ -147,15 +122,9 @@ const UpdateStudy = () => {
           />
         </div>
         <div className={styles.recruitmentDiv}>
-          <h3>모집 직무</h3>
+          <h3>모집 인원</h3>
           {fieldList.map((field, index) => (
             <div key={index}>
-              <input
-                type="text"
-                name="fieldCategory"
-                value={field.fieldCategory}
-                onChange={(event) => handleFieldListChange(index, event)}
-              />
               <input
                 type="number"
                 name="totalRecruitment"
@@ -164,20 +133,13 @@ const UpdateStudy = () => {
               />
             </div>
           ))}
-          <button onClick={addField}>직무 추가</button>
         </div>
-        <div className={styles.language}>
-          <h3>사용 기술 및 언어</h3>
-        </div>
-        <div className={styles.etc}>
-          <h3>기타 참고사항</h3>
-        </div>
-        <div>
+        <div className={styles.buttons}>
           <button onClick={updateStudy} className={styles.btn}>
-            수정
+            수정하기
           </button>
           <button onClick={cancel} className={styles.btn}>
-            삭제
+            삭제하기
           </button>
         </div>
       </main>
