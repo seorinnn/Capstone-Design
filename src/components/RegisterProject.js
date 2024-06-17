@@ -8,17 +8,18 @@ function RegisterProject() {
   const navigate = useNavigate();
   const fileInputRef = useRef();
   const [imageFile, setImageFile] = useState(null);
-  const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
-    useState(defaultProjectImg);
+  const [defaultProjectImgSrc, setDefaultProjectImgSrc] = useState(defaultProjectImg);
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
     content: "",
     fieldList: [],
+    startDate: "",
+    endDate: "",
     imageUrl: "", // 이미지 URL 추가
   });
 
-  const { title, category, content, fieldList } = projectInfo;
+  const { title, content, fieldList, startDate, endDate } = projectInfo;
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -31,8 +32,7 @@ function RegisterProject() {
   const handleFieldListChange = (index, event) => {
     const { name, value } = event.target;
     const newFieldList = [...fieldList];
-    newFieldList[index][name] =
-      name === "totalRecruitment" ? parseInt(value, 10) : value;
+    newFieldList[index][name] = name === "totalRecruitment" ? parseInt(value, 10) : value;
     setProjectInfo({
       ...projectInfo,
       fieldList: newFieldList,
@@ -61,10 +61,7 @@ function RegisterProject() {
     }
 
     // projectInfo 객체를 Blob 형태로 변환하여 formData에 추가
-    formData.append(
-      "json",
-      new Blob([JSON.stringify(projectInfo)], { type: "application/json" })
-    );
+    formData.append("json", new Blob([JSON.stringify(projectInfo)], { type: "application/json" }));
 
     try {
       const res = await axios.post(`/api/posts`, formData, {
@@ -117,6 +114,14 @@ function RegisterProject() {
             value={content}
             onChange={onChange}
           />
+          <div>
+            <label>시작 날짜:</label>
+            <input type="date" name="startDate" value={startDate} onChange={onChange} />
+          </div>
+          <div>
+            <label>종료 날짜:</label>
+            <input type="date" name="endDate" value={endDate} onChange={onChange} />
+          </div>
         </div>
         <div className={styles.recruitmentDiv}>
           <h3>모집 직무</h3>

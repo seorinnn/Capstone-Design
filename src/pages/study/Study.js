@@ -13,6 +13,10 @@ const Study = ({ title, content }) => {
     navigate(`/UpdateProject/${idx}`);
   };
 
+  const moveToApply = () => {
+    navigate(`/Applycation/${idx}`);
+  };
+
   //게시글 삭제하기
   const deleteProject = async () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
@@ -53,7 +57,9 @@ const Study = ({ title, content }) => {
             <div className={styles.contents}>
               <div className={styles.recruitmentDiv}>
                 <p>지원</p>
-                <button>지원</button>
+                <button className={styles.btn} onClick={moveToApply}>
+                  지원
+                </button>
               </div>
             </div>
           </div>

@@ -18,8 +18,6 @@ function ProjectDetail() {
     }
   };
 
-  console.log(project.image);
-
   useEffect(() => {
     getProject();
   }, []);
@@ -31,6 +29,9 @@ function ProjectDetail() {
         content={project.content}
         fieldList={project.fieldList}
         imageUrl={project.image} // 이미지 URL 추가
+        memberId={project.memberId} //추가부분
+        startDate={project.startDate} // 추가 부분
+        endDate={project.endDate} // 추가 부분
       />
     </div>
   );

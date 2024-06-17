@@ -40,9 +40,7 @@ const BoardInformation = ({ title, content }) => {
       <footer>
         <div className={styles.inner}>
           <button onClick={updateBoard} className={styles.btn}>수정</button>
-          <button onClick={deleteBoard} className={styles.btn}>
-            삭제
-          </button>
+          <button onClick={deleteBoard} className={styles.btn}>삭제</button>
         </div>
       </footer>
       </div>

@@ -19,6 +19,12 @@
   justify-content: center;
 }
 
+
+.searchStudy {
+  display: flex;
+  justify-content: center;
+}
+
 .mainletter {
   text-align: center;
   font-size: 32px;

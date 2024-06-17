@@ -38,6 +38,15 @@ function Nav() {
         <div className={styles.userList}>
           {isLoggedIn ? (
             <>
+              <li className={styles.appliesList}> {/* New Link */}
+                <Link to="/appliesList/my">내 지원 내역</Link>
+              </li>
+              <li className={styles.appliesList}> {/* New Link */}
+                <Link to="/appliesList">지원 목록</Link>
+              </li>
+              <li className={styles.conversation}> {/* New Link */}
+                <Link to="/conversation">대화 목록</Link>
+              </li>
               <li className={styles.myPage}>
                 <Link to="/MyPage">내 정보</Link>
               </li>

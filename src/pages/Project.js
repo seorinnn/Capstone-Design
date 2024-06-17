@@ -4,21 +4,27 @@ import axios from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
+const Project = ({
+  title,
+  content,
+  fieldList = [],
+  imageUrl = {},
+  memberId,
+  startDate,
+  endDate,
+}) => {
+  // startDate, endDate 추가
   const navigate = useNavigate();
   const { idx } = useParams();
-  console.log(imageUrl);
 
-  // 수정 화면으로 이동
   const moveToUpdate = () => {
     navigate(`/UpdateProject/${idx}`);
   };
 
-  const moveToApply = () => {
-    navigate(`/Application/${idx}`);
+  const moveToApply = (fieldCategory) => {
+    navigate(`/Applycation/${idx}`, { state: { fieldCategory } });
   };
 
-  // 게시글 삭제하기
   const deleteProject = async () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       await axios.delete(`/api/posts/${idx}`).then((res) => {
@@ -28,11 +34,19 @@ const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
     }
   };
 
-  //console.log(imageUrl);
-  // imageUrl 객체에서 실제 이미지 경로 문자열을 추출
-  // const imagePath = imageUrl.imageUrl;
-  // console.log("imagePath : " + imagePath);
-  //<img alt="projectImg" src={require(`../image/${imagePath}`)} />
+  // 추가부분
+  const startConversation = async () => {
+    try {
+      const response = await axios.post("/api/messages/conversation", {
+        postId: idx,
+        receiverId: memberId,
+      });
+      navigate(`/conversation/${response.data.id}`);
+    } catch (err) {
+      console.error("Failed to start conversation:", err);
+      alert("Failed to start conversation");
+    }
+  };
 
   return (
     <>
@@ -43,10 +57,11 @@ const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
         <header className={styles.projectInfoHeader}>
           <div className={styles.headerInfo}>
             <div className={styles.headerInfoTitle}>
-
               <h1>{title}</h1>
             </div>
             <p>사용자 정보</p>
+            <button onClick={startConversation}>작성자와 채팅</button>{" "}
+            {/* New button */}
           </div>
         </header>
         <main className={styles.projectInfoMain}>
@@ -54,6 +69,10 @@ const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
             <h3 className={styles.sectionTitle}>프로젝트 소개 및 기간</h3>
             <hr />
             <div className={styles.contents}>
+              <p>
+                프로젝트 기간: {startDate} ~ {endDate}
+              </p>{" "}
+              {/* 추가된 부분 */}
               <p>{content}</p>
             </div>
           </div>
@@ -67,7 +86,12 @@ const Project = ({ title, content, fieldList = [], imageUrl = {} }) => {
                   <p>
                     {field.currentRecruitment} / {field.totalRecruitment}
                   </p>
-                  <button onClick={moveToApply}>지원</button>
+                  <button
+                    className={styles.btn}
+                    onClick={() => moveToApply(field.fieldCategory)}
+                  >
+                    지원
+                  </button>
                 </div>
               ))}
             </div>

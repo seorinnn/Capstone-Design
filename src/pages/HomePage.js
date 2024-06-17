@@ -1,7 +1,13 @@
 import styles from "./HomePage.module.css";
 import ProjectSummary from "../components/ProjectSummary.js";
+import { Link, useNavigate } from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigate();
+  function moveManual() {
+    navigate("/Manual");
+  }
+
   return (
     <>
       <div className={styles.home}>
@@ -10,6 +16,7 @@ function HomePage() {
             <img
               alt="homeImg"
               src={require("../assets/home_instruction.png")}
+              onClick={moveManual}
             />
           </header>
         </div>

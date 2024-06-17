@@ -1,5 +1,5 @@
 import styles from "./ProjectListPage.module.css";
-import Search from "../components/Search.js";
+import SearchProject from "../components/SearchProject.js";
 import ProjectSummary from "../components/ProjectSummary.js";
 
 function ProjectListPage() {
@@ -30,7 +30,7 @@ function ProjectListPage() {
         </div>
         <h1 className={styles.mainletter}>검색</h1>
         <div className={styles.searchProject}>
-          <Search />
+          <SearchProject />
         </div>
       </div>
     </>
