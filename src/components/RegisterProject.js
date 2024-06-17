@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styles from "./RegisterProject.module.css";
-import defaultProjectImg from "../assets/DefaultProjectImg.jpg";
+import defaultProjectImg from "../assets/DefaultProjectImg.png";
 import axios from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,16 +10,17 @@ function RegisterProject() {
   const [imageFile, setImageFile] = useState(null);
   const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
     useState(defaultProjectImg);
-
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
     content: "",
     fieldList: [],
-    imageUrl: "" // 이미지 URL 추가
+    startDate: "",
+    endDate: "",
+    imageUrl: "", // 이미지 URL 추가
   });
 
-  const { title, category, content, fieldList } = projectInfo;
+  const { title, content, fieldList, startDate, endDate } = projectInfo;
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -52,6 +53,12 @@ function RegisterProject() {
     if (event.target.files && event.target.files[0]) {
       setImageFile(event.target.files[0]);
       setDefaultProjectImgSrc(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
+  const cancel = () => {
+    if (window.confirm("작업을 그만 두시겠습니까?")) {
+      navigate(`/StudyList`);
     }
   };
 
@@ -88,12 +95,6 @@ function RegisterProject() {
     }
   };
 
-  const cancel = () => {
-    if (window.confirm("작업을 그만 두시겠습니까?")) {
-      navigate(`/ProjectList`);
-    }
-  };
-
   return (
     <>
       <div className={styles.RegisterProjectHeader}>
@@ -102,15 +103,6 @@ function RegisterProject() {
         </header>
       </div>
       <main className={styles.RegisterProjectMain}>
-        <div className={styles.projectImg}>
-          <h3>배경사진 선택</h3>
-          <img alt="profileImg" src={defaultProjectImgSrc} />
-          <input
-            type="file"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-          ></input>
-        </div>
         <div className={styles.projectName}>
           <h3>프로젝트명</h3>
           <input type="text" name="title" value={title} onChange={onChange} />
@@ -124,6 +116,24 @@ function RegisterProject() {
             value={content}
             onChange={onChange}
           />
+          <div>
+            <label>시작 날짜:</label>
+            <input
+              type="date"
+              name="startDate"
+              value={startDate}
+              onChange={onChange}
+            />
+          </div>
+          <div>
+            <label>종료 날짜:</label>
+            <input
+              type="date"
+              name="endDate"
+              value={endDate}
+              onChange={onChange}
+            />
+          </div>
         </div>
         <div className={styles.recruitmentDiv}>
           <h3>모집 직무</h3>
@@ -148,12 +158,13 @@ function RegisterProject() {
         <div className={styles.language}>
           <h3>사용 기술 및 언어</h3>
         </div>
-        <div className={styles.etc}>
-          <h3>기타 참고사항</h3>
-        </div>
-        <div>
-          <button onClick={postProject}>등록하기</button>
-          <button onClick={cancel}>취소하기</button>
+        <div className={styles.buttonDiv}>
+          <button className={styles.registerButton} onClick={postProject}>
+            등록하기
+          </button>
+          <button className={styles.cancelButton} onClick={cancel}>
+            취소하기
+          </button>
         </div>
       </main>
     </>

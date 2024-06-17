@@ -35,16 +35,14 @@ function SearchProject() {
   };
   useEffect(() => {
     getProjectList();
-  },[]);
+  }, []);
 
   const sortProject = (project, order) => {
-    if(order === "최신순") {
+    if (order === "최신순") {
       return project;
-    }
-    else if(order === "조회수 낮은순") {
+    } else if (order === "조회수 낮은순") {
       return project.sort((a, b) => a.viewCount - b.viewCount);
-    }
-    else if(order === "조회수 높은순") {
+    } else if (order === "조회수 높은순") {
       return project.sort((a, b) => b.viewCount - a.viewCount);
     }
   };
@@ -60,7 +58,7 @@ function SearchProject() {
     setFilteredProject(filtered);
   };
   const handleKeyDown = (event) => {
-    if(event.key === `Enter`) {
+    if (event.key === `Enter`) {
       event.preventDefault();
       onSearchHandler();
     }
@@ -89,7 +87,7 @@ function SearchProject() {
 
   return (
     <>
-      <div className={styles.main}>
+      <div className={styles.SearchProject}>
         <div>
           <Paper
             component="form"
@@ -103,14 +101,14 @@ function SearchProject() {
             <input
               className={styles.search}
               type="text"
-              placeholder="검색"
+              placeholder="궁금한 프로젝트를 검색해보세요!"
               value={search}
               onChange={onSearchtext}
               onKeyDown={handleKeyDown}
             />
             <Divider sx={{ height: 28, m: 1 }} orientation="vertical" />
             <Button
-              className={styles.button}
+              className={styles.searchButton1}
               label="Searchbtn"
               variant="contained"
               color="secondary"
@@ -120,7 +118,7 @@ function SearchProject() {
             </Button>
             <Divider sx={{ height: 28, m: 1 }} orientation="vertical" />
             <Button
-              className={styles.button2}
+              className={styles.searchButton2}
               label="프로젝트 등록하기"
               variant="contained"
               color="secondary"
@@ -171,7 +169,7 @@ function SearchProject() {
                 <img
                   className={styles.photo}
                   alt="img"
-                  src={require(`../assets/DefaultProjectImg.jpg`)}
+                  src={require(`../assets/DefaultProjectImg.png`)}
                 />
                 <p className={styles.pmainletter}>{project.title}</p>
               </Link>

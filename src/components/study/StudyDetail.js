@@ -18,7 +18,15 @@ function StudyDetail() {
 
   return (
     <div>
-      <Study title={study.title} content={study.content} />
+      <Study
+        title={study.title}
+        content={study.content}
+        startDate={study.startDate} // 추가 부분
+        endDate={study.endDate} // 추가 부분
+        fieldList={study.fieldList}
+        imageUrl={study.image} // 이미지 URL 추가
+        memberId={study.memberId} //추가부분
+      />
     </div>
   );
 }

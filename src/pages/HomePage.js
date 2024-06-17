@@ -1,6 +1,6 @@
 import styles from "./HomePage.module.css";
 import ProjectSummary from "../components/ProjectSummary.js";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -17,12 +17,12 @@ function HomePage() {
               alt="homeImg"
               src={require("../assets/home_instruction.png")}
               onClick={moveManual}
+              className={styles.homeImg}
             />
           </header>
         </div>
-
         <main className={styles.main}>
-          <h3>현재 구인중인 프로젝트들</h3>
+          <h3 className={styles.mainTitle}>현재 구인중인 프로젝트들</h3>
           <div className={styles.projectSummary}>
             <ProjectSummary />
           </div>

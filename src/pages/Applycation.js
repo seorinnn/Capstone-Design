@@ -12,11 +12,11 @@ const Applycation = () => {
   const [applyInfo, setApplyInfo] = useState({
     category: "PROJECT",
     content: "",
-    fieldCategory: fieldCategoryFromState // Initialize with fieldCategory from state
+    fieldCategory: fieldCategoryFromState, // Initialize with fieldCategory from state
   });
   const [projectInfo, setProjectInfo] = useState({
     title: "",
-    fieldList: []
+    fieldList: [],
   });
 
   useEffect(() => {
@@ -35,11 +35,11 @@ const Applycation = () => {
   const { category, content, fieldCategory } = applyInfo;
   const { title } = projectInfo;
 
-  const onChange = event => {
+  const onChange = (event) => {
     const { value, name } = event.target;
-    setApplyInfo(prevState => ({
+    setApplyInfo((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -63,28 +63,33 @@ const Applycation = () => {
 
   return (
     <>
-      <div className={styles.Applycation}>
+      <div className={styles.applycation}>
         <h1 className={styles.header}>지원서 작성하기</h1>
       </div>
-      <div>
-        <h2>제목 : {title}</h2>
-        <h2>카테고리 : {category}</h2>
-        <h2>지원 : {fieldCategory}</h2>
+      <div className={styles.info}>
+        <h2>제목: {title}</h2>
+        <h2>카테고리: {category}</h2>
+        <h2>지원: {fieldCategory}</h2>
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className={styles.textAreaContainer}>
         <textarea
           name="content"
-          cols="100"
-          rows="50"
+          className={styles.textArea}
           value={content}
           onChange={onChange}
         />
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button onClick={complete} className={styles.btn}>
+      <div className={styles.buttonContainer}>
+        <button
+          onClick={complete}
+          className={`${styles.btn} ${styles.confirmBtn}`}
+        >
           확인
         </button>
-        <button onClick={cancel} className={styles.btn}>
+        <button
+          onClick={cancel}
+          className={`${styles.btn} ${styles.cancelBtn}`}
+        >
           취소
         </button>
       </div>
