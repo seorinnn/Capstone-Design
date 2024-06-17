@@ -8,9 +8,10 @@ const Applycation = () => {
   const { idx } = useParams();
   const location = useLocation();
   const fieldCategoryFromState = location.state?.fieldCategory || ""; // Get the fieldCategory from state
+  const categoryFromState = fieldCategoryFromState === "" ? "STUDY" : "PROJECT";
 
   const [applyInfo, setApplyInfo] = useState({
-    category: "PROJECT",
+    category: categoryFromState,
     content: "",
     fieldCategory: fieldCategoryFromState, // Initialize with fieldCategory from state
   });
@@ -66,10 +67,10 @@ const Applycation = () => {
       <div className={styles.applycation}>
         <h1 className={styles.header}>지원서 작성하기</h1>
       </div>
-      <div className={styles.info}>
-        <h2>제목: {title}</h2>
-        <h2>카테고리: {category}</h2>
-        <h2>지원: {fieldCategory}</h2>
+      <div>
+        <h2>제목 : {title}</h2>
+        <h2>카테고리 : {category}</h2>
+        {category === "PROJECT" ? (<h2>지원 : {fieldCategory}</h2>) : ""}
       </div>
       <div className={styles.textAreaContainer}>
         <textarea

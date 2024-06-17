@@ -8,8 +8,10 @@ function RegisterProject() {
   const navigate = useNavigate();
   const fileInputRef = useRef();
   const [imageFile, setImageFile] = useState(null);
+
   const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
     useState(defaultProjectImg);
+
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
@@ -33,8 +35,7 @@ function RegisterProject() {
   const handleFieldListChange = (index, event) => {
     const { name, value } = event.target;
     const newFieldList = [...fieldList];
-    newFieldList[index][name] =
-      name === "totalRecruitment" ? parseInt(value, 10) : value;
+    newFieldList[index][name] = name === "totalRecruitment" ? parseInt(value, 10) : value;
     setProjectInfo({
       ...projectInfo,
       fieldList: newFieldList,
@@ -69,10 +70,7 @@ function RegisterProject() {
     }
 
     // projectInfo 객체를 Blob 형태로 변환하여 formData에 추가
-    formData.append(
-      "json",
-      new Blob([JSON.stringify(projectInfo)], { type: "application/json" })
-    );
+    formData.append("json", new Blob([JSON.stringify(projectInfo)], { type: "application/json" }));
 
     try {
       const res = await axios.post(`/api/posts`, formData, {
@@ -157,6 +155,9 @@ function RegisterProject() {
         </div>
         <div className={styles.language}>
           <h3>사용 기술 및 언어</h3>
+        </div>
+        <div className={styles.etc}>
+          <h3>기타 참고사항</h3>
         </div>
         <div className={styles.buttonDiv}>
           <button className={styles.registerButton} onClick={postProject}>

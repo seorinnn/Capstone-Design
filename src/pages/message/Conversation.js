@@ -47,6 +47,13 @@ const Conversation = () => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === `Enter`) {
+      event.preventDefault();
+      sendMessage();
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -76,6 +83,7 @@ const Conversation = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Write a message..."
+          onKeyDown={handleKeyDown}
         />
         <button onClick={sendMessage}>Send</button>
       </div>

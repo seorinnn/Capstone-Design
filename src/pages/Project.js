@@ -13,6 +13,7 @@ const Project = ({
   startDate,
   endDate,
 }) => {
+  // startDate, endDate 추가
   const navigate = useNavigate();
   const { idx } = useParams();
 

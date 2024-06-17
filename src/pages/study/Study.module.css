@@ -136,3 +136,7 @@ footer .btn:hover {
 .chatButton:hover {
   background-color: #bbdefb;
 }
+
+main .btn {
+  cursor: pointer;
+}
