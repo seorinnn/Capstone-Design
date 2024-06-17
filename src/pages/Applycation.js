@@ -8,15 +8,16 @@ const Applycation = () => {
   const { idx } = useParams();
   const location = useLocation();
   const fieldCategoryFromState = location.state?.fieldCategory || ""; // Get the fieldCategory from state
+  const categoryFromState = fieldCategoryFromState === "" ? "STUDY" : "PROJECT";
 
   const [applyInfo, setApplyInfo] = useState({
-    category: "PROJECT",
+    category: categoryFromState,
     content: "",
-    fieldCategory: fieldCategoryFromState // Initialize with fieldCategory from state
+    fieldCategory: fieldCategoryFromState, // Initialize with fieldCategory from state
   });
   const [projectInfo, setProjectInfo] = useState({
     title: "",
-    fieldList: []
+    fieldList: [],
   });
 
   useEffect(() => {
@@ -35,11 +36,11 @@ const Applycation = () => {
   const { category, content, fieldCategory } = applyInfo;
   const { title } = projectInfo;
 
-  const onChange = event => {
+  const onChange = (event) => {
     const { value, name } = event.target;
-    setApplyInfo(prevState => ({
+    setApplyInfo((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -69,7 +70,7 @@ const Applycation = () => {
       <div>
         <h2>제목 : {title}</h2>
         <h2>카테고리 : {category}</h2>
-        <h2>지원 : {fieldCategory}</h2>
+        {category === "PROJECT" ? (<h2>지원 : {fieldCategory}</h2>) : ""}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <textarea

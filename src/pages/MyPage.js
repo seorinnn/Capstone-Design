@@ -43,106 +43,87 @@ function MyPage() {
     fetchUserData();
   }, []);
 
-  //하트 click 함수
-  const handleClick = () => {
-    if (isClicked) {
-      setImageSrc(heartBeforeImg);
-      setIsClicked(false); //초기 상태로
-    } else {
-      setImageSrc(heartAfterImg);
-      setIsClicked(true);
-    }
-  };
   return (
-    <>
-      <div className={styles.MyPage}>
-        <div className={styles.profile}>
-          <img alt="profileImg" src={require(`../assets/profileImg.avif`)} />
-          <div className={styles.profileInfo}>
-            <section className={styles.section1}>
-              <h2>{user?.nickname}</h2>
-              <p className={styles.major}>(전공자)</p>
-              <img alt="heart" src={imageSrc} onClick={handleClick} />
-            </section>
-            <section className={styles.section2}>
-              <p className={styles.info}></p>
-            </section>
-            <section className={styles.section3}>
-              <h2>내 전공</h2>
-              <p>{user?.major}</p>
-            </section>
-            <section className={styles.section4}>
-              <h2>내 기술스택</h2>
-              <img alt="reactImg" src={require(`../assets/react.png`)} />
-            </section>
+    <div className={styles.MyPage}>
+      <div
+        className={`${styles.profile} ${styles.flexColumn} ${styles.flexCenter}`}
+      >
+        <img alt="profileImg" src={require(`../assets/profileImg.avif`)} />
+        <div className={styles.profileInfo}>
+          <section className={styles.section1}>
+            <h2>{user?.nickname}</h2>
+            <p className={styles.major}>(전공자)</p>
+          </section>
+          <section className={styles.section2}>
+            <p className={styles.info}></p>
+          </section>
+          <section className={styles.section3}>
+            <h2>내 전공</h2>
+            <p>{user?.major}</p>
+          </section>
+          <section className={styles.section4}>
+            <h2>내 기술스택</h2>
+            <img alt="reactImg" src={require(`../assets/react.png`)} />
+          </section>
+        </div>
+      </div>
+
+      <div className={styles.userProject}>
+        <div className={styles.presentProject}>
+          <h3>구인중인 프로젝트</h3>
+          <div className={styles.inner}>
+            {recruitproject.map((project) => (
+              <div className={styles.projectSummary} key={project.projectId}>
+                <Link to={`/ProjectInformation/${project.id}`}>
+                  <img
+                    className={styles.photo}
+                    alt="img"
+                    src={require(`../assets/DefaultProjectImg.jpg`)}
+                  />
+                  <p className={styles.pmainletter}>{project.title}</p>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
-        <div className={styles.userProject}>
-          <div className={styles.presentProject}>
-            <h3>구인중인 프로젝트</h3>
-            <div className={styles.inner}>
-              {recruitproject.map((project) => (
-                <div className={styles.projectSummary}>
-                  <Link
-                    to={`/ProjectInformation/${project.id}`}
-                    key={project.projectId}
-                  >
-                    <img
-                      className={styles.photo}
-                      alt="img"
-                      src={require(`../assets/DefaultProjectImg.jpg`)}
-                    />
-                    <p className={styles.pmainletter}>{project.title}</p>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className={styles.pastProject}>
-            <h3>지원한 프로젝트</h3>
-            <div className={styles.inner}>
-              {applyproject.map((project) => (
-                <div className={styles.projectSummary}>
-                  <Link
-                    to={`/ProjectInformation/${project.id}`}
-                    key={project.projectId}
-                  >
-                    <img
-                      className={styles.photo}
-                      alt="img"
-                      src={require(`../assets/DefaultProjectImg.jpg`)}
-                    />
-                    <p className={styles.pmainletter}>{project.title}</p>
-                  </Link>
-                </div>
-              ))}
-            </div>
+
+        <div className={styles.pastProject}>
+          <h3>지원한 프로젝트</h3>
+          <div className={styles.inner}>
+            {applyproject.map((project) => (
+              <div className={styles.projectSummary} key={project.projectId}>
+                <Link to={`/ProjectInformation/${project.id}`}>
+                  <img
+                    className={styles.photo}
+                    alt="img"
+                    src={require(`../assets/DefaultProjectImg.jpg`)}
+                  />
+                  <p className={styles.pmainletter}>{project.title}</p>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
-        <div className={styles.userProject}>
-          <div className={styles.pastProject}>
-            <h3>종료된 프로젝트</h3>
-            <div className={styles.inner}>
-              {progressproject.map((project) => (
-                <div className={styles.projectSummary}>
-                  <Link
-                    to={`/ProjectInformation/${project.id}`}
-                    key={project.projectId}
-                  >
-                    <img
-                      className={styles.photo}
-                      alt="img"
-                      src={require(`../assets/DefaultProjectImg.jpg`)}
-                    />
-                    <p className={styles.pmainletter}>{project.title}</p>
-                  </Link>
-                </div>
-              ))}
-            </div>
+
+        <div className={styles.pastProject}>
+          <h3>종료된 프로젝트</h3>
+          <div className={styles.inner}>
+            {progressproject.map((project) => (
+              <div className={styles.projectSummary} key={project.projectId}>
+                <Link to={`/ProjectInformation/${project.id}`}>
+                  <img
+                    className={styles.photo}
+                    alt="img"
+                    src={require(`../assets/DefaultProjectImg.jpg`)}
+                  />
+                  <p className={styles.pmainletter}>{project.title}</p>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

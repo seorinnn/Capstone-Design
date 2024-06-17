@@ -91,3 +91,7 @@ footer .btn {
   padding: 5px 5px;
   cursor: pointer;
 }
+
+main .btn {
+  cursor: pointer;
+}

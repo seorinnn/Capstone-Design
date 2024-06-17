@@ -4,7 +4,16 @@ import axios from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const Project = ({ title, content, fieldList = [], imageUrl = {}, memberId, startDate, endDate }) => { // startDate, endDate 추가
+const Project = ({
+  title,
+  content,
+  fieldList = [],
+  imageUrl = {},
+  memberId,
+  startDate,
+  endDate,
+}) => {
+  // startDate, endDate 추가
   const navigate = useNavigate();
   const { idx } = useParams();
 
@@ -28,14 +37,14 @@ const Project = ({ title, content, fieldList = [], imageUrl = {}, memberId, star
   // 추가부분
   const startConversation = async () => {
     try {
-      const response = await axios.post('/api/messages/conversation', {
+      const response = await axios.post("/api/messages/conversation", {
         postId: idx,
-        receiverId: memberId
+        receiverId: memberId,
       });
       navigate(`/conversation/${response.data.id}`);
     } catch (err) {
-      console.error('Failed to start conversation:', err);
-      alert('Failed to start conversation');
+      console.error("Failed to start conversation:", err);
+      alert("Failed to start conversation");
     }
   };
 
@@ -51,7 +60,8 @@ const Project = ({ title, content, fieldList = [], imageUrl = {}, memberId, star
               <h1>{title}</h1>
             </div>
             <p>사용자 정보</p>
-            <button onClick={startConversation}>작성자와 채팅</button> {/* New button */}
+            <button onClick={startConversation}>작성자와 채팅</button>{" "}
+            {/* New button */}
           </div>
         </header>
         <main className={styles.projectInfoMain}>
@@ -59,7 +69,10 @@ const Project = ({ title, content, fieldList = [], imageUrl = {}, memberId, star
             <h3 className={styles.sectionTitle}>프로젝트 소개 및 기간</h3>
             <hr />
             <div className={styles.contents}>
-              <p>프로젝트 기간: {startDate} ~ {endDate}</p> {/* 추가된 부분 */}
+              <p>
+                프로젝트 기간: {startDate} ~ {endDate}
+              </p>{" "}
+              {/* 추가된 부분 */}
               <p>{content}</p>
             </div>
           </div>
@@ -73,7 +86,12 @@ const Project = ({ title, content, fieldList = [], imageUrl = {}, memberId, star
                   <p>
                     {field.currentRecruitment} / {field.totalRecruitment}
                   </p>
-                  <button onClick={() => moveToApply(field.fieldCategory)}>지원</button>
+                  <button
+                    className={styles.btn}
+                    onClick={() => moveToApply(field.fieldCategory)}
+                  >
+                    지원
+                  </button>
                 </div>
               ))}
             </div>

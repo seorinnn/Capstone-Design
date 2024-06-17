@@ -18,7 +18,7 @@ import axios from "../lib/axios";
 /**검색 부분*/
 function SearchProject() {
   const [views, setViews] = useState("최신순");
-  const [job, setJob] = useState("");
+  const [job, setJob] = useState("전체");
   const [search, setSearch] = useState("");
   const [filteredProject, setFilteredProject] = useState([]);
   const [projectList, setProjectList] = useState([]);
@@ -66,11 +66,11 @@ function SearchProject() {
     }
   };
 
-  function handleChange2(event) {
+  const handleChange1 = (event) => {
     setJob(event.target.value);
-  }
+  };
 
-  const handleChange4 = (event) => {
+  const handleChange2 = (event) => {
     const newSortOrder = event.target.value;
     setViews(newSortOrder);
 
@@ -138,12 +138,11 @@ function SearchProject() {
               id="demo-simple-select"
               value={job}
               label="직무"
-              onChange={handleChange2}
+              onChange={handleChange1}
             >
-              <MenuItem value={"None"}></MenuItem>
-              <MenuItem value={`프론트엔드`}>프론트엔드</MenuItem>
-              <MenuItem value={`백엔드`}>백엔드</MenuItem>
-              <MenuItem value={`디자인`}>디자인</MenuItem>
+              <MenuItem value={`전체`}>전체</MenuItem>
+              <MenuItem value={`FRONTEND`}>프론트엔드</MenuItem>
+              <MenuItem value={`BACKEND`}>백엔드</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -153,7 +152,7 @@ function SearchProject() {
               id="demo-simple-select"
               value={views}
               label="조회수"
-              onChange={handleChange4}
+              onChange={handleChange2}
             >
               <MenuItem value={`최신순`}>최신순</MenuItem>
               <MenuItem value={`조회수 높은순`}>조회수 높은순</MenuItem>
