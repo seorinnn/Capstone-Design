@@ -31,7 +31,7 @@ function ProjectSummary() {
               <img
                 className={styles.photo}
                 alt="img"
-                src={require(`../assets/DefaultProjectImg.jpg`)}
+                src={require(`../assets/DefaultProjectImg.png`)}
               />
               <p className={styles.mainletter}>{project.title}</p>
             </Link>

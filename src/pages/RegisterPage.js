@@ -34,6 +34,7 @@ function RegisterPage() {
       const response = await axios.get(
         `/api/members/exists/nickname?nickname=${nickname}`
       );
+      console.log(response);
       const isNicknameTaken = response.data;
 
       if (isNicknameTaken) {

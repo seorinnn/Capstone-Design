@@ -32,7 +32,8 @@ const UpdateProject = () => {
     getProject();
   }, []);
 
-  const { title, category, content, fieldList, startDate, endDate } = projectInfo;
+  const { title, category, content, fieldList, startDate, endDate } =
+    projectInfo;
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -97,23 +98,12 @@ const UpdateProject = () => {
 
   return (
     <>
-      <div className={styles.RegisterProjectHeader}>
+      <div className={styles.registerProjectHeader}>
         <header>
           <h1>프로젝트 수정하기</h1>
         </header>
       </div>
-      <main className={styles.RegisterProjectMain}>
-        <div className={styles.projectImg}>
-          <h3>배경사진 선택</h3>
-          {defaultProjectImgSrc && (
-            <img alt="profileImg" src={defaultProjectImgSrc} />
-          )}
-          <input
-            type="file"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-          ></input>
-        </div>
+      <main className={styles.registerProjectMain}>
         <div className={styles.projectName}>
           <h3>프로젝트명</h3>
           <input type="text" name="title" value={title} onChange={onChange} />
@@ -149,7 +139,7 @@ const UpdateProject = () => {
         <div className={styles.recruitmentDiv}>
           <h3>모집 직무</h3>
           {fieldList.map((field, index) => (
-            <div key={index}>
+            <div key={index} className={styles.fieldItem}>
               <input
                 type="text"
                 name="fieldCategory"
@@ -164,20 +154,25 @@ const UpdateProject = () => {
               />
             </div>
           ))}
-          <button onClick={addField}>직무 추가</button>
+          <button onClick={addField} className={styles.addFieldBtn}>
+            직무 추가
+          </button>
         </div>
         <div className={styles.language}>
           <h3>사용 기술 및 언어</h3>
         </div>
-        <div className={styles.etc}>
-          <h3>기타 참고사항</h3>
-        </div>
-        <div>
-          <button onClick={updateProject} className={styles.btn}>
-            수정
+        <div className={styles.buttons}>
+          <button
+            onClick={updateProject}
+            className={`${styles.btn} ${styles.updateBtn}`}
+          >
+            수정하기
           </button>
-          <button onClick={cancel} className={styles.btn}>
-            삭제
+          <button
+            onClick={cancel}
+            className={`${styles.btn} ${styles.cancelBtn}`}
+          >
+            삭제하기
           </button>
         </div>
       </main>

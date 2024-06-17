@@ -24,14 +24,11 @@ function BoardSummary() {
       <div className={styles.inner}>
         {boardList.map((board) => (
           <div className={styles.projectSummary}>
-            <Link
-              to={`/BoardInformation/${board.id}`}
-              key={board.projectId}
-            >
+            <Link to={`/BoardInformation/${board.id}`} key={board.projectId}>
               <img
                 className={styles.photo}
                 alt="img"
-                src={require(`../assets/DefaultProjectImg.jpg`)}
+                src={require(`../assets/DefaultProjectImg.png`)}
               />
               <p className={styles.mainletter}>{board.title}</p>
             </Link>

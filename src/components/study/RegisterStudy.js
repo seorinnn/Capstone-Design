@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import styles from "./RegisterStudy.module.css";
-import defaultStudyImg from "../../assets/DefaultProjectImg.jpg";
+import defaultStudyImg from "../../assets/DefaultStudyImg.png";
 import axios from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -15,14 +15,15 @@ function RegisterStudy() {
     category: "STUDY",
     content: "",
     fieldList: [{ fieldCategory: "GENERAL", totalRecruitment: 0 }],
+    startDate: "", // Add startDate to state
+    endDate: "", // Add endDate to state
     imageUrl: "",
   });
 
-  //비구조화 할당으로 projectInfo가 바로 값을 분해해 변수에 할당함
-  const { title, content, fieldList } = studyInfo;
+  const { title, content, fieldList, startDate, endDate } = studyInfo;
 
   const onChange = (event) => {
-    const { value, name } = event.target; //event.target에서 name과 value만 가져옴
+    const { value, name } = event.target;
     setStudyInfo({
       ...studyInfo,
       [name]: value,
@@ -34,7 +35,7 @@ function RegisterStudy() {
     setStudyInfo({
       ...studyInfo,
       fieldList: [
-        { fieldCategory: "GENERAL", totalRecruitment: parseInt(value, 10) }
+        { fieldCategory: "GENERAL", totalRecruitment: parseInt(value, 10) },
       ],
     });
   };
@@ -66,7 +67,7 @@ function RegisterStudy() {
 
       const updatedStudyInfo = {
         ...studyInfo,
-        imageUrl: res.data.imageUrl, // 서버에서 반환된 이미지 URL을 저장
+        imageUrl: res.data.imageUrl,
       };
       setStudyInfo(updatedStudyInfo);
 
@@ -92,15 +93,6 @@ function RegisterStudy() {
         </header>
       </div>
       <main className={styles.RegisterProjectMain}>
-        <div className={styles.projectImg}>
-          <h3>배경사진 선택</h3>
-          <img alt="profileImg" src={defaultStudyImgSrc} />
-          <input
-            type="file"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-          ></input>
-        </div>
         <div className={styles.projectName}>
           <h3>스터디명</h3>
           <input type="text" name="title" value={title} onChange={onChange} />
@@ -114,11 +106,29 @@ function RegisterStudy() {
             value={content}
             onChange={onChange}
           />
+          <div>
+            <label>시작 날짜:</label>
+            <input
+              type="date"
+              name="startDate"
+              value={startDate}
+              onChange={onChange}
+            />
+          </div>
+          <div>
+            <label>종료 날짜:</label>
+            <input
+              type="date"
+              name="endDate"
+              value={endDate}
+              onChange={onChange}
+            />
+          </div>
         </div>
         <div className={styles.recruitmentDiv}>
           <h3>모집 인원</h3>
           {fieldList.map((field, index) => (
-            <div key={index}>
+            <div key={index} className={styles.studyCruit}>
               <input
                 type="number"
                 name="totalRecruitment"
@@ -131,9 +141,13 @@ function RegisterStudy() {
         <div className={styles.etc}>
           <h3>기타 참고사항</h3>
         </div>
-        <div>
-          <button onClick={complete}>등록하기</button>
-          <button onClick={cancel}>취소하기</button>
+        <div className={styles.buttonDiv}>
+          <button onClick={complete} className={styles.registerButton}>
+            등록하기
+          </button>
+          <button onClick={cancel} className={styles.cancelButton}>
+            취소하기
+          </button>
         </div>
       </main>
     </>

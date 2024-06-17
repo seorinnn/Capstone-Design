@@ -29,7 +29,7 @@ function StudySummary() {
               <img
                 className={styles.photo}
                 alt="img"
-                src={require(`../../assets/DefaultProjectImg.jpg`)}
+                src={require(`../../assets/DefaultStudyImg.png`)}
               />
               <p className={styles.mainletter}>{study.title}</p>
             </Link>

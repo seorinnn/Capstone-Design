@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styles from "./RegisterProject.module.css";
-import defaultProjectImg from "../assets/DefaultProjectImg.jpg";
+import defaultProjectImg from "../assets/DefaultProjectImg.png";
 import axios from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,10 @@ function RegisterProject() {
   const navigate = useNavigate();
   const fileInputRef = useRef();
   const [imageFile, setImageFile] = useState(null);
-  const [defaultProjectImgSrc, setDefaultProjectImgSrc] = useState(defaultProjectImg);
+
+  const [defaultProjectImgSrc, setDefaultProjectImgSrc] =
+    useState(defaultProjectImg);
+
   const [projectInfo, setProjectInfo] = useState({
     title: "",
     category: "PROJECT",
@@ -54,6 +57,12 @@ function RegisterProject() {
     }
   };
 
+  const cancel = () => {
+    if (window.confirm("작업을 그만 두시겠습니까?")) {
+      navigate(`/StudyList`);
+    }
+  };
+
   const postProject = async () => {
     const formData = new FormData();
     if (imageFile) {
@@ -92,15 +101,6 @@ function RegisterProject() {
         </header>
       </div>
       <main className={styles.RegisterProjectMain}>
-        <div className={styles.projectImg}>
-          <h3>배경사진 선택</h3>
-          <img alt="profileImg" src={defaultProjectImgSrc} />
-          <input
-            type="file"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-          ></input>
-        </div>
         <div className={styles.projectName}>
           <h3>프로젝트명</h3>
           <input type="text" name="title" value={title} onChange={onChange} />
@@ -114,13 +114,23 @@ function RegisterProject() {
             value={content}
             onChange={onChange}
           />
-          <div>
-            <label>시작 날짜:</label>
-            <input type="date" name="startDate" value={startDate} onChange={onChange} />
+          <div className={styles.date}>
+            <h3>프로젝트 시작일</h3>
+            <input
+              type="date"
+              name="startDate"
+              value={startDate}
+              onChange={onChange}
+            />
           </div>
-          <div>
-            <label>종료 날짜:</label>
-            <input type="date" name="endDate" value={endDate} onChange={onChange} />
+          <div className={styles.date}>
+            <h3>프로젝트 종료일</h3>
+            <input
+              type="date"
+              name="endDate"
+              value={endDate}
+              onChange={onChange}
+            />
           </div>
         </div>
         <div className={styles.recruitmentDiv}>
@@ -149,8 +159,13 @@ function RegisterProject() {
         <div className={styles.etc}>
           <h3>기타 참고사항</h3>
         </div>
-        <div>
-          <button onClick={postProject}>등록하기</button>
+        <div className={styles.buttonDiv}>
+          <button className={styles.registerButton} onClick={postProject}>
+            등록하기
+          </button>
+          <button className={styles.cancelButton} onClick={cancel}>
+            취소하기
+          </button>
         </div>
       </main>
     </>

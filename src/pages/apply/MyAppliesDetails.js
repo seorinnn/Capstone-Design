@@ -37,6 +37,14 @@ const MyApplyDetails = () => {
     }
   };
 
+  const goToPostDetail = () => {
+    if (apply.postCategory === "스터디") {
+      navigate(`/StudyInformation/${apply.postId}`);
+    } else if (apply.postCategory === "프로젝트") {
+      navigate(`/ProjectInformation/${apply.postId}`);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -61,6 +69,7 @@ const MyApplyDetails = () => {
             지원서 수정
           </button>
           <button onClick={deleteApply}>지원서 삭제</button>
+          <button onClick={goToPostDetail}>지원한 게시글 바로가기</button>
         </div>
       </div>
     </div>

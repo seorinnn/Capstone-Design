@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
-import "./ConversationList.css"; // Ensure you have CSS for styling
+import "./ConversationList.css";
 
 const ConversationList = () => {
   const [groupedConversations, setGroupedConversations] = useState({});
@@ -42,28 +42,33 @@ const ConversationList = () => {
     fetchConversations();
   }, []);
 
-  if (loading) return <div>로딩 중...</div>;
-  if (error) return <div>오류가 발생했습니다: {error.message}</div>;
+  if (loading) return <div className="loading">로딩 중...</div>;
+  if (error)
+    return <div className="error">오류가 발생했습니다: {error.message}</div>;
 
   return (
     <div className="conversation-list-container">
+      <h1 className="page-title">대화 목록</h1>
       {Object.keys(groupedConversations).map((postId) => (
         <div key={postId} className="post-section">
-          <h2>{groupedConversations[postId].postTitle}에 대한 대화입니다</h2>
-          <ul>
+          <h2 className="post-title">
+            {groupedConversations[postId].postTitle}에 대한 대화입니다
+          </h2>
+          <ul className="conversation-list">
             {groupedConversations[postId].conversations.map((conversation) => (
               <li
                 key={conversation.id}
                 onClick={() => navigate(`/conversation/${conversation.id}`)}
                 className="conversation-item"
               >
-                <span className="nickname">
-                  {conversation.counterpartMember.nickname}
-                </span>{" "}
-                -
-                <span className="recent-message-time">
-                  {new Date(conversation.recentMessage).toLocaleString()}
-                </span>
+                <div className="conversation-info">
+                  <span className="nickname">
+                    {conversation.counterpartMember.nickname}
+                  </span>
+                  <span className="recent-message-time">
+                    {new Date(conversation.recentMessage).toLocaleString()}
+                  </span>
+                </div>
               </li>
             ))}
           </ul>
